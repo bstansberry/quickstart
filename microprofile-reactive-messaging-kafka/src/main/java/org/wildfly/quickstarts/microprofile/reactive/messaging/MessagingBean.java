@@ -42,6 +42,7 @@ public class MessagingBean {
 
     @Outgoing("source")
     public CompletionStage<String> sendInVm() {
+        System.out.println("sendInVm");
         return producer.getNextValue();
     }
 
@@ -55,14 +56,18 @@ public class MessagingBean {
     @Incoming("filter")
     @Outgoing("sender")
     public PublisherBuilder<String> filter(PublisherBuilder<String> messages) {
+        System.out.println("filter");
         return messages
+                .filter(s -> {System.out.println("filtering " + s); return true;})
                 .filter(s -> s.equals("Hello") || s.equals("Kafka"));
     }
 
     @Incoming("sender")
     @Outgoing("to-kafka")
     public Publisher<TimedEntry> sendToKafka(Publisher<String> messages) {
+        System.out.println("sendToKafka");
         return ReactiveStreams.fromPublisher(messages)
+                .filter(s -> {System.out.println("sendingToKafka " + s); return true;})
                 .map(s -> new TimedEntry(new Timestamp(System.currentTimeMillis()), s))
                 .buildRs();
     }

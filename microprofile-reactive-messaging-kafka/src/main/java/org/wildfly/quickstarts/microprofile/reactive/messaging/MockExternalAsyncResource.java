@@ -50,7 +50,16 @@ public class MockExternalAsyncResource {
             "Kafka"
     };
 
-    private ScheduledExecutorService delayedExecutor = Executors.newSingleThreadScheduledExecutor(Executors.defaultThreadFactory());
+    private final ThreadGroup group = Thread.currentThread().getThreadGroup();
+    private final AtomicInteger threadNumber = new AtomicInteger(0);
+    private final ScheduledExecutorService delayedExecutor = Executors.newSingleThreadScheduledExecutor(r -> {
+        Thread t = new Thread(group, r,
+                MockExternalAsyncResource.class.getSimpleName() + "-" + threadNumber.getAndIncrement(),
+                0);
+        t.setDaemon(false);
+        t.setPriority(Thread.NORM_PRIORITY);
+        return t;
+    });
     private final AtomicInteger count = new AtomicInteger(0);
     private long last = System.currentTimeMillis();
 
@@ -82,12 +91,15 @@ public class MockExternalAsyncResource {
         @Override
         public void run() {
             final int index = count.getAndIncrement();
+            String value;
             if (index < values.length) {
-                cf.complete(values[index]);
+                value = values[index];
             } else {
                 int random = (int)(Math.random() * values.length);
-                cf.complete(values[random]);
+                value = values[random];
             }
+            System.out.println("Completing " + value);
+            cf.complete(value);
         }
     }
 }
