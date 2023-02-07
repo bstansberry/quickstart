@@ -25,7 +25,7 @@ package org.jboss.as.quickstarts.helloworld;
 public class HelloService {
 
     String createHelloMessage(String name) {
-        return "Go to bed now " + name + "!";
+        return "Please Go to bed now " + name + "!";
     }
 
 }
