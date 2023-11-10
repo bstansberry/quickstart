@@ -1,0 +1,6 @@
+// TODO Update wildfly-quickstart-parent to set the quickstart-publish adoc attribute only in the 'publish' profile
+//ifdef::quickstart-publish[]
+link:../{artifactId}/index.html[Browse the source]
+// TODO use the following instead of the above once this is only enabled in the 'publish' profile
+//link:../{artifactId}/index.html[Browse the source] or https://wildlfy.org/downloads[download the Quickstart zip]
+//endif::quickstart-publish[]
