@@ -28,8 +28,9 @@ import jakarta.data.repository.Delete;
 import jakarta.data.repository.Find;
 import jakarta.data.repository.Insert;
 import jakarta.data.repository.Repository;
+import jakarta.data.repository.Update;
 
-@Repository(dataStore = "java:jboss/datasources/ToDoRepository")
+@Repository(dataStore = "ToDos")
 public interface ToDoRepository {
 
     @Find
@@ -44,5 +45,6 @@ public interface ToDoRepository {
     @Insert
     void insert(ToDo todo);
 
-    Optional<ToDo> update(Long id, ToDo todo);
+    @Update
+    ToDo update(ToDo todo);
 }

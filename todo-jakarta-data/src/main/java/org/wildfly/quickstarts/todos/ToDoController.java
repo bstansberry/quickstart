@@ -99,6 +99,10 @@ public class ToDoController {
     @Consumes(APPLICATION_JSON)
     @Transactional
     public ToDo updateTodo(@PathParam("id") long id, ToDo update) {
-        return toDoRepository.update(id, update).orElseThrow(() -> new NotFoundException("ToDo does not exist!"));
+        Optional<ToDo> optional = toDoRepository.find(id);
+        if (optional.isPresent()) {
+            return toDoRepository.update(update);
+        }
+        throw new NotFoundException("ToDo does not exist!");
     }
 }
