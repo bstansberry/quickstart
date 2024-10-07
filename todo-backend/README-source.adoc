@@ -32,6 +32,12 @@ to manage a list of ToDo which are persisted in a database with `JPA`.
 
 // Link to the quickstart source
 include::../shared-doc/view-the-source.adoc[leveloffset=+1]
+
+[NOTE]
+====
+The `todo-jakarta-data` quickstart is conceptually equivalent to the `todo-backend` quickstart, but it uses `Jakarta Data` for persistence instead of `Jakarta Persistence`.
+====
+
 // System Requirements
 include::../shared-doc/system-requirements.adoc[leveloffset=+1]
 
