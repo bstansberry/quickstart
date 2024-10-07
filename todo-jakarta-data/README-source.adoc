@@ -17,8 +17,8 @@ include::../shared-doc/attributes.adoc[]
 :helmSetWildFlyArgumentPrefix: wildfly.
 
 [abstract]
-The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with JAX-RS
-to manage a list of ToDo which are persisted in a database with JPA.
+The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with Jakarta RESTful Web Services
+to manage a list of ToDo which are persisted in a database with Jakarta Data.
 
 ifndef::ProductRelease[]
 This quickstart shows how to setup a local deployment of this backend as well as a deployment on OpenShift to connect
@@ -32,8 +32,8 @@ endif::[]
 
 == What is it?
 
-The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with `JAX-RS`
-to manage a list of ToDo which are persisted in a database with `JPA`.
+The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with `Jakarta REST`
+to manage a list of ToDo which are persisted in a database with `Jakarta Data`.
 
 * The backend exposes a HTTP API to manage a list of todos that complies with the specs defined at https://todobackend.com/specs/index.html[todobackend.com].
 * It requires a connection to a PostgreSQL database to persist the todos.
