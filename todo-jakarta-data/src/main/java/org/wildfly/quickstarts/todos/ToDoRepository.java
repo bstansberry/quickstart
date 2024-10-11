@@ -30,7 +30,7 @@ import jakarta.data.repository.Insert;
 import jakarta.data.repository.Repository;
 import jakarta.data.repository.Update;
 
-@Repository(dataStore = "ToDos")
+@Repository
 public interface ToDoRepository {
 
     @Find
