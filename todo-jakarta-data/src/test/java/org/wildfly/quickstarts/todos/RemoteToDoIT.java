@@ -41,7 +41,7 @@ import org.junit.jupiter.api.Test;
  */
 public class RemoteToDoIT {
 
-    private static final String REST_TARGET_URL = "http://localhost:8080/todo-backend";
+    private static final String REST_TARGET_URL = "http://localhost:8080/todo-jakarta-data";
 
     private String getServerHost() {
         String host = System.getenv("SERVER_HOST");
