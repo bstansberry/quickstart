@@ -27,7 +27,6 @@ ifdef::ProductRelease[]
 :productVersion: 8.0
 :DocInfoProductNumber: {productVersion}
 :WildFlyQuickStartRepoTag: 8.0.x
-:productImageVersion: 8.0.0
 :helmChartName: jboss-eap/eap8
 endif::[]
 
@@ -35,11 +34,8 @@ ifdef::EAPXPRelease[]
 // JBoss EAP XP release
 :productName: JBoss EAP XP
 :productNameFull: Red Hat JBoss Enterprise Application Platform expansion pack
-:productVersion: 3.0
-:DocInfoProductNumber: 7.4
-:WildFlyQuickStartRepoTag: XP_3.0.0.GA
-:productImageVersion: 3.0
-:helmChartName: jboss-eap/eap-xp3
+:productVersion: 5.0
+:WildFlyQuickStartRepoTag: XP_5.0.0.GA
 endif::[]
 
 ifdef::ProductRelease,EAPXPRelease[]
@@ -62,14 +58,12 @@ ifndef::ProductRelease,EAPXPRelease[]
 :productNameFull: WildFly Application Server
 :ProductShortName: {productName}
 :jbossHomeName: WILDFLY_HOME
-:productVersion: 34
-:productImageVersion: 34.0
+:productVersion: 38
 :githubRepoUrl: https://github.com/wildfly/quickstart/
 :githubRepoCodeUrl: https://github.com/wildfly/quickstart.git
-:WildFlyQuickStartRepoTag: 34.0.0.Beta1
+:WildFlyQuickStartRepoTag: 37.0.0.Final
 :DocInfoProductName: Red Hat JBoss Enterprise Application Platform
 :DocInfoProductNameURL: red_hat_jboss_enterprise_application_platform
-:DocInfoProductNumber: 8.0
 :DocInfoPreviousProductName: jboss-enterprise-application-platform
 :helmRepoName: wildfly
 :helmRepoUrl: http://docs.wildfly.org/wildfly-charts/
@@ -80,33 +74,15 @@ endif::[]
 :source: {githubRepoUrl}
 
 // Values for Openshift S2i sections attributes
-:CDProductName:  {productNameFull} for OpenShift
-:CDProductShortName: {ProductShortName} for OpenShift
-:CDProductTitle: {CDProductName}
-:CDProductNameSentence: Openshift release for {ProductShortName}
-:CDProductAcronym: {CDProductShortName}
-:CDProductVersion: {productVersion}
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {EapForOpenshiftBookName} Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {xpaasproduct} Online
-:xpaasproduct-shortname: {CDProductShortName}
-:xpaasproductOpenShiftOnline-shortname: {xpaasproduct-shortname} Online
+:xpaasproduct-shortname: {ProductShortName} for OpenShift
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: Getting Started with {ProductShortName} for OpenShift Container Platform
 :EapForOpenshiftOnlineBookName: Getting Started with {ProductShortName} for OpenShift Online
 :OpenShiftOnlinePlatformName: Red Hat OpenShift Container Platform
 :OpenShiftOnlineName: Red Hat OpenShift Online
-:ImagePrefixVersion: eap80
-:ImageandTemplateImportBaseURL: https://raw.githubusercontent.com/jboss-container-images/jboss-eap-openshift-templates
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepo: https://github.com/jboss-developer/jboss-eap-quickstarts
-:EAPQuickStartRepoRef: 8.0.x
-:EAPQuickStartRepoTag: EAP_8.0.0.GA
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_online/
@@ -116,37 +92,22 @@ ifdef::EAPXPRelease[]
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {productNameFull} for OpenShift Online
-:xpaasproduct-shortname: {ProductShortName} for OpenShift
-:xpaasproductOpenShiftOnline-shortname: {ProductShortName} for OpenShift Online
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
-:ImagePrefixVersion: eap-xp3
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepoRef: xp-3.0.x
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 endif::[]
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
-:ImageandTemplateImportURL: https://raw.githubusercontent.com/wildfly/wildfly-s2i/v{productVersion}.0/
-endif::[]
-
 //*************************
 // Other values
 //*************************
-:buildRequirements: Java 11.0 (Java SDK 11) or later and Maven 3.6.0 or later
-:jbdsEapServerName: Red Hat JBoss Enterprise Application Platform 7.3
+:buildRequirements: Java SE 17.0 or later, and Maven 3.6.0 or later
 :javaVersion: Jakarta EE 10
 ifdef::EAPXPRelease[]
 :javaVersion: Eclipse MicroProfile
 endif::[]
-:githubRepoBranch: master
 :guidesBaseUrl: https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/
 :useEclipseUrl: {guidesBaseUrl}USE_JBDS.adoc#use_red_hat_jboss_developer_studio_or_eclipse_to_run_the_quickstarts
 :useEclipseDeployJavaClientDocUrl: {guidesBaseUrl}USE_JBDS.adoc#deploy_and_undeploy_a_quickstart_containing_server_and_java_client_projects
@@ -168,35 +129,6 @@ endif::[]
 :configureBytemanQuickstartDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
 :configureBytemanHaltDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#use_byteman_to_halt_the_application[
 :configureBytemanQuickstartsDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
-
-:EESubsystemNamespace: urn:jboss:domain:ee:4.0
-:IiopOpenJdkSubsystemNamespace: urn:jboss:domain:iiop-openjdk:2.0
-:MailSubsystemNamespace: urn:jboss:domain:mail:3.0
-:SingletonSubsystemNamespace: urn:jboss:domain:singleton:1.0
-:TransactionsSubsystemNamespace: urn:jboss:domain:transactions:4.0
-
-// LinkProductDocHome: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
-:LinkProductDocHome: https://access.redhat.com/documentation/en/jboss-enterprise-application-platform-continuous-delivery
-:LinkConfigGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/configuration_guide/
-:LinkDevelopmentGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/development_guide/
-:LinkGettingStartedGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_guide/
-:LinkOpenShiftWelcome: https://docs.openshift.com/online/welcome/index.html
-:LinkOpenShiftSignup: https://docs.openshift.com/online/getting_started/choose_a_plan.html
-:OpenShiftTemplateName: JBoss EAP CD (no https)
-
-:ConfigBookName: Configuration Guide
-:DevelopmentBookName: Development Guide
-:GettingStartedBookName: Getting Started Guide
-
-:JBDSProductName: Red Hat CodeReady Studio
-:JBDSVersion: 12.15
-:LinkJBDSInstall:  https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/installation_guide/
-:JBDSInstallBookName: Installation Guide
-:LinkJBDSGettingStarted: https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/getting_started_with_codeready_studio_tools/
-:JBDSGettingStartedBookName: Getting Started with CodeReady Studio Tools
-
-// Enable Rendering of Glow configuration in plugin examples
-:portedToGlow: true
 
 = jts: Java Transaction Service - Distributed EJB Transactions
 :author: Tom Jenkinson
@@ -226,8 +158,9 @@ ACID is a set of 4 properties that guarantee the resources are processed in the 
 
 The example uses Java Transaction Service (JTS) to propagate a transaction context across two Container-Managed Transaction (CMT) EJBs that, although deployed in separate servers, participate in the same transaction. In this example, one server processes the Customer and Account data and the other server processes the Invoice data.
 
-The code base is essentially the same as the link:../cmt/README.adoc[cmt] quickstart, however in this case the `InvoiceManager` has been separated to a different deployment archive to demonstrate the usage of JTS. You can see the changes in the
-following ways:
+The code base is essentially the same as the link:../cmt/README.adoc[cmt] quickstart.
+As a consequence, developers should be familiar with the concepts introduced in that quickstart.
+However, in this case the `InvoiceManager` has been separated to a different deployment archive to demonstrate the usage of JTS. You can see the changes in the following ways:
 
 * `cmt/src/main/java/org/jboss/as/quickstarts/cmt/ejb/InvoiceManagerEJB.java` has been moved to `application-component-2/src/main/java/org/jboss/as/quickstarts/cmt/jts/ejb/InvoiceManagerEJB`
 * `cmt/src/main/java/org/jboss/as/quickstarts/cmt/ejb/CustomerManagerEJB.java` has been moved to `jts/application-component-1/src/main/java/org/jboss/as/quickstarts/cmt/jts/ejb/CustomerManagerEJB.java`
@@ -246,37 +179,6 @@ Also, while the `cmt` quickstart uses the Jakarta EE container default datasourc
 ifndef::ProductRelease,EAPXPRelease[]
 link:https://github.com/wildfly/quickstart/tree/{WildFlyQuickStartRepoTag}/{artifactId}[Browse the source]
 endif::[]
-
-:leveloffset!:
-// Considerations for Use in a Production Environment
-:leveloffset: +1
-
-[[considerations_for_use_in_a_production_environment]]
-= Considerations for Use in a Production Environment
-//******************************************************************************
-// Include this template if your quickstart:
-// * Uses the h2 database: Be sure to define the `uses-h2` attribute.
-// * Uses an `*-ds.xml file`: Be sure to define the `uses-ds-xml` attribute.
-// * Has performance or scalability concerns: Be sure to define the `uses-ds-xml` attribute.
-//******************************************************************************
-
-ifdef::uses-h2[]
-
-H2 Database:: This quickstart uses the H2 database included with {productNameFull} {productVersion}. It is a lightweight, relational example datasource that is used for examples only. It is not robust or scalable, is not supported, and should NOT be used in a production environment.
-
-endif::uses-h2[]
-
-ifdef::uses-ds-xml[]
-
-Datasource Configuration File:: This quickstart uses a `*-ds.xml` datasource configuration file for convenience and ease of database configuration. These files are deprecated in {productName} and should not be used in a production environment. Instead, you should configure the datasource using the Management CLI or Management Console. Datasource configuration is documented in the {LinkConfigGuide}[__{ConfigBookName}__].
-
-endif::uses-ds-xml[]
-
-ifdef::performance-scalability[]
-
-Performance and Scalability:: A Jakarta EE container is designed with robustness in mind, so you should carefully analyze the scalabiltiy, concurrency, and performance needs of your application before taking advantage of these techniques in your own applications.
-
-endif::performance-scalability[]
 
 :leveloffset!:
 // System Requirements
@@ -333,26 +235,16 @@ endif::[]
 
 :leveloffset!:
 
-== Prerequisites
-
-Developers should be familiar with the concepts introduced in the `cmt` quickstart.
-
-This quickstart requires the configuration of two servers. The first server must be configured to use the PostgreSQL database. Instructions to install and configure PostgreSQL are below.
-
 [[configure_the_postgresql_database_for_use_with_this_quickstart]]
-== Configure the PostgreSQL Database for Use with this Quickstart
+== Create a PostgreSQL Database
 
-This quickstart requires the PostgreSQL database.
+As this quickstart performs transactional work against a database, it is needed to create a new database.
+For the purpose of this quickstart, a simple PostgreSQL container will be used, please open another terminal and run the following command to download and start its image:
 
-. Instructions to install and configure PostgreSQL can be found here: link:{configurePostgresDownloadDocUrl}[Download and Install PostgreSQL]
-
-. For the purpose of this quickstart, replace the word `__QUICKSTART_DATABASE_NAME__` with `jts-quickstart-database` in the PostgreSQL instructions.
-
-. Make sure you link:{configurePostgresCreateUserDocUrl}[Create a Database User] for the PostgeSQL database.
-
-. When you have completed these steps, make sure you start the PostgreSQL database. Unless you have set up the database to automatically start as a service, you must repeat the instructions to start the database server for your operating system every time you reboot your machine.
-
-Wait until later in these instructions to add the PostgreSQL module and driver configuration to the first {productName} server.
+[source,sh,options="nowrap"]
+----
+podman run -p 5432:5432 --rm  -ePOSTGRES_DB=test -ePOSTGRES_USER=test -ePOSTGRES_PASSWORD=test postgres:9.4 -c max-prepared-transactions=110 -c log-statement=all
+----
 
 == Configure the Servers
 
@@ -366,26 +258,26 @@ You configure JTS transactions by running JBoss CLI commands. For your convenien
 
 . Before you begin, back up your server configuration file
 ** If it is running, stop the {productName} server.
-** Back up the file: `__{jbossHomeName}__/standalone/configuration/standalone-full.xml`
+** Back up the file: `__{jbossHomeName}_1__/standalone/configuration/standalone-full.xml`
 ** After you have completed testing this quickstart, you can replace this file to restore the server to its original configuration.
 . Start the {productName} server with the standalone full profile, passing a unique node ID, by typing the following command. Make sure you replace `UNIQUE_NODE_ID_1` with a node identifier that is unique to both servers.
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
+$__{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
 ----
 +
-NOTE: For Windows, use the `__{jbossHomeName}__\bin\standalone.bat` script.
+NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` script.
 
 . Review the `configure-jts-transactions.cli` file in the root of this quickstart directory. This script configures the server to use jts transaction processing.
-. Open a new terminal, navigate to the root directory of this quickstart, and run the following command, replacing `__{jbossHomeName}__` with the path to your server:
+. Open a new terminal, navigate to the root directory of this quickstart, and run the following command, replacing `__{jbossHomeName}_1__` with the path to your server:
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}__/bin/jboss-cli.sh --connect --file=configure-jts-transactions.cli
+$__{jbossHomeName}_1__/bin/jboss-cli.sh --connect --file=configure-jts-transactions.cli
 ----
 +
-NOTE: For Windows, use the `__{jbossHomeName}__\bin\jboss-cli.bat` script.
+NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` script.
 
 +
 You should see the following result when you run the script:
@@ -402,7 +294,7 @@ IMPORTANT: When you have completed testing this quickstart, it is important to x
 
 === Review the Modified Server Configuration
 
-After stopping the server, open the `__{jbossHomeName}__/standalone/configuration/standalone-full.xml` file and review the changes.
+After stopping the server, open the `__{jbossHomeName}_1__/standalone/configuration/standalone-full.xml` file and review the changes.
 
 . The orb initializers `transactions` attribute is changed from `spec` to `full` in the `iiop-openjdk` subsystem to enable JTS.
 +
@@ -436,69 +328,41 @@ Make a copy of this {productName} directory structure to use for the second serv
 
 === Configure Server1 to use PostgreSQL
 
-Application server 1 must be now configured to use the PostgreSQL database created previously in the xref:configure_the_postgresql_database_for_use_with_this_quickstart[Configure the PostgreSQL Database for Use with this Quickstart] section.
+The {productName} server 1 need to be configured to be able to connect to the database created previously in the xref:configure_the_postgresql_database_for_use_with_this_quickstart[Create a PostgreSQL Database] section.
+First of all, a JDBC driver needs to be installed as https://docs.wildfly.org/30/Developer_Guide.html#Class_Loading_in_WildFly[jboss module].
 
-. Make sure you start the PostgreSQL database. Unless you have set up the database to automatically start as a service, you must repeat the instructions "Start the database server" for your operating system every time you reboot your machine.
-. Follow the instructions to link:{configurePostgresAddModuleDocUrl}[Add the PostgreSQL Module to the {productName} Server] to the server 1 install only.
-. Follow the instructions to link:{configurePostgresDriverDocUrl}[Configure the PostgreSQL Driver in the {ProductName} Server] for the server 1 configuration. Make sure you pass the `-Djboss.tx.node.id=UNIQUE_NODE_ID_1` on the command line when you start the first server to configure PostgreSQL.
+The following command downloads the PostgreSQL driver automatically through Maven. When needed, replace __{jbossHomeName}_1__ with the path to your server
 
-If there are issues with the scripts or you just want to configure the servers manually then the following will work:
+1. Open a new terminal, navigate to the root directory of this quickstart, and run the following command:
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
++
+----
+mvn clean package
+----
+1. Then, add a JBoss Module with the PostgreSQL driver to the {productName} server 1:
++
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
+----
+$__{jbossHomeName}_1__/bin/jboss-cli.sh "embed-server,\
+  module add --name=org.postgresql.jdbc \
+  --resources=application-component-1/target/postgresql/postgresql.jar"
+----
+1. Moreover, the PostgreSQL driver needs to be added to the datasources subsystem, in the {productName} server 1:
++
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
+----
+$__{jbossHomeName}_1__/bin/jboss-cli.sh "embed-server --server-config=standalone-full.xml,\
+  /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql.jdbc,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)"
+----
+1. Finally, it is time to run the script for adding the PostgreSQL datasource to the {productName} server 1:
++
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
+----
+$__{jbossHomeName}_1__/bin/jboss-cli.sh -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
+  --file=application-component-1/scripts/postgresql-datasource.cli \
+  --properties=application-component-1/scripts/cli.local.properties
+----
 
-Start server 1:
-```
-export WILDFLY_HOME_1=...
-$WILDFLY_HOME_1/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1 &
-# enable JTS mode
-cd <quickstarts repo>/jts
-$WILDFLY_HOME_1/bin/jboss-cli.sh --connect --file=configure-jts-transactions.cli
-```
-
-Stop server 1 and create second server by copying the installation directory:
-```
-cp -r $WILDFLY_HOME_1 ${WILDFLY_HOME_1}-2
-export WILDFLY_HOME_2=${WILDFLY_HOME_1}-2
-```
-
-Configure postgresql on server 1 only as a module:
-```
-mkdir -p $WILDFLY_HOME_1/modules/org/postgresql/main
-# download postgresql-42.6.0.jar or later and install it into the server:
-cp <downloads>/postgresql-42.6.0.jar $WILDFLY_HOME_1/modules/org/postgresql/main
-```
-Create a module.xml for postgresql with the following contents:
-```
-$ cat $WILDFLY_HOME_1/modules/org/postgresql/main/module.xml
-<?xml version="1.0" encoding="UTF-8"?>
-<module xmlns="urn:jboss:module:1.1" name="org.postgresql">
-    <resources>
-        <!--resource-root path="postgresql-42.1.4.jre7.jar"/-->
-        <resource-root path="postgresql-42.6.0.jar"/>
-    </resources>
-    <dependencies>
-        <module name="javax.api"/>
-        <module name="javax.transaction.api"/>
-    </dependencies>
-</module>
-```
-
-Add the datasource to $WILDFLY_HOME_1/standalone/configuration/standalone-full.xml
-When you have done this the final changes to standalone-full.xml should be:
-
-```
-$ diff $WILDFLY_HOME_1/standalone/configuration/standalone-full.xml $WILDFLY_HOME_2/standalone/configuration/standalone-full.xml
-137,142d136
-<                 <datasource jndi-name="java:jboss/datasources/PostgresDS" pool-name="PostgresDS" enabled="true" use-java-context="true" statistics-enabled="${wildfly.datasources.statistics-enabled:${wildfly.statistics-enabled:false}}">
-<                     <connection-url>jdbc:postgresql://localhost:5432/postgres</connection-url>
-<                     <driver>postgresql</driver>
-<                     <security user-name="sa" password="sa"/>
-<                 </datasource>
-<
-147,149d140
-<                     <driver name="postgresql" module="org.postgresql">
-<                         <xa-datasource-class>org.postgresql.xa.PGXADataSource</xa-datasource-class>
-<                     </driver>
-
-```
 [[start_the_servers]]
 == Start the Servers
 
@@ -506,8 +370,8 @@ Start the two {productName} server with the standalone full profile, passing a u
 
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
-$ __{jbossHomeName}_2__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_2 -Djboss.socket.binding.port-offset=100
+$__{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
+$__{jbossHomeName}_2__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_2 -Djboss.socket.binding.port-offset=100
 ----
 
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` and  `__{jbossHomeName}_2__\bin\standalone.bat` scripts.
@@ -524,7 +388,7 @@ Since this quickstart builds two separate components, you can not use the standa
 +
 [source,options="nowrap"]
 ----
-$ mvn clean install wildfly:deploy
+mvn clean install wildfly:deploy
 ----
 
 . This will deploy `{artifactId}-application-component-1.war` and `{artifactId}-application-component-2.jar` to the running instance of the server.
@@ -533,32 +397,14 @@ $ mvn clean install wildfly:deploy
 
 The application will be running at the following URL: http://localhost:8080/{artifactId}-application-component-1/.
 
-When you enter a name and click to `Add` that customer, you will see the following in the application server 1 console:
+When you enter a name and click to `Add` that customer, you will see the following in the application server 2 console:
 
 [source,options="nowrap"]
 ----
-INFO  [org.hibernate.hql.internal.QueryTranslatorFactoryInitiator] (default task-2) HHH000397: Using ASTQueryTranslatorFactory
-INFO  [org.jboss.ejb.client] (default task-4) JBoss EJB Client version 2.1.4.Final-redhat-1
-----
-
-You will also see the following in application-server-2 console:
-
-[source,options="nowrap"]
-----
-INFO  [org.jboss.ejb.client] (p: default-threadpool; w: Idle) JBoss EJB Client version 2.1.4.Final-redhat-1
 INFO  [class org.jboss.as.quickstarts.cmt.jts.mdb.HelloWorldMDB] (Thread-97 (ActiveMQ-client-global-threads-6840624)) Received Message: Created invoice for customer named: Tom
 ----
 
 The web page will also change and show you the new list of customers.
-
-== Server Log: Expected Warnings and Errors
-
-You will see the following warnings in the server log. You can ignore these warnings.
-
-[source,options="nowrap"]
-----
-WFLYJCA0091: -ds.xml file deployments are deprecated. Support may be removed in a future version.
-----
 
 // Undeploy the Quickstart
 :leveloffset: +1
@@ -582,7 +428,6 @@ $ mvn wildfly:undeploy
 
 :leveloffset!:
 
-
 [[remove_the_jts_configuration_from_the_server]]
 == Remove the JTS Configuration From the Server
 
@@ -596,7 +441,7 @@ You can modify the server configuration by running the `remove-jts-transactions.
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
+$__{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
 ----
 +
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` script.
@@ -605,7 +450,7 @@ NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` script.
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}_1__/bin/jboss-cli.sh --connect --file=remove-jts-transactions.cli
+$__{jbossHomeName}_1__/bin/jboss-cli.sh --connect --file=remove-jts-transactions.cli
 ----
 +
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` script.
@@ -629,7 +474,7 @@ process-state: restart-required
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
+$__{jbossHomeName}_1__/bin/standalone.sh -c standalone-full.xml -Djboss.tx.node.id=UNIQUE_NODE_ID_1
 ----
 +
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` script.
@@ -638,7 +483,7 @@ NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\standalone.bat` script.
 +
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}_1__/bin/jboss-cli.sh --connect
+$__{jbossHomeName}_1__/bin/jboss-cli.sh --connect
 ----
 +
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` script.
@@ -668,8 +513,8 @@ NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` script.
 === Remove the JTS Server Configuration Manually
 
 . Stop the server.
-. If you backed up the `__{jbossHomeName}__/standalone/configuration/standalone-full.xml` file, ,simply replace the edited configuration file with the backup copy.
-. If you did not make a backup copy, open the file `__{jbossHomeName}__/standalone/configuration/standalone-full.`xml` and disable JTS as follows:
+. If you backed up the `__{jbossHomeName}_1__/standalone/configuration/standalone-full.xml` file, ,simply replace the edited configuration file with the backup copy.
+. If you did not make a backup copy, open the file `__{jbossHomeName}_1__/standalone/configuration/standalone-full.`xml` and disable JTS as follows:
 ** Find the `orb` subsystem and change the configuration back to its original state.
 +
 [source,xml,subs="attributes+",options="nowrap"]
@@ -693,35 +538,12 @@ NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` script.
 </subsystem>
 ----
 
-// Run the Quickstart in Red Hat CodeReady Studio or Eclipse
+// Quickstart not compatible with OpenShift
 :leveloffset: +1
 
-[[run_the_quickstart_in_redhat_codeready_studio_or_eclipse]]
-= Run the Quickstart in {JBDSProductName} or Eclipse
-//******************************************************************************
-// Include this template to provide instructions to run the quickstart
-// in Red Hat CodeReady Studio.
-//
-// If the quickstart is not supported, create the `jbds-not-supported` attribute.
-//******************************************************************************
-ifdef::jbds-not-supported[]
-This quickstart is not supported in {JBDSProductName}.
-endif::jbds-not-supported[]
+[[openshift_incompatibility]]
+= {xpaasproduct-shortname} Incompatibility
 
-ifndef::jbds-not-supported[]
-You can also start the server and deploy the quickstarts, or run any tests in {JBDSProductName} or from Eclipse using JBoss tools. For general information about how to import a quickstart, add a {productName} server, and build and deploy a quickstart, see link:{useEclipseUrl}[Use {JBDSProductName} or Eclipse to Run the Quickstarts].
-endif::jbds-not-supported[]
-
-// Add additional instructions specific to running this quickstart in an IDE here.
+This quickstart is not compatible with {xpaasproduct-shortname}.
 
 :leveloffset!:
-
-//*************************************************
-// Product Release content only
-//*************************************************
-ifdef::ProductRelease[]
-
-// Quickstart not compatible with OpenShift
-include::../shared-doc/openshift-incompatibility.adoc[leveloffset=+1]
-
-endif::[]

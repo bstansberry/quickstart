@@ -27,7 +27,6 @@ ifdef::ProductRelease[]
 :productVersion: 8.0
 :DocInfoProductNumber: {productVersion}
 :WildFlyQuickStartRepoTag: 8.0.x
-:productImageVersion: 8.0.0
 :helmChartName: jboss-eap/eap8
 endif::[]
 
@@ -35,11 +34,8 @@ ifdef::EAPXPRelease[]
 // JBoss EAP XP release
 :productName: JBoss EAP XP
 :productNameFull: Red Hat JBoss Enterprise Application Platform expansion pack
-:productVersion: 3.0
-:DocInfoProductNumber: 7.4
-:WildFlyQuickStartRepoTag: XP_3.0.0.GA
-:productImageVersion: 3.0
-:helmChartName: jboss-eap/eap-xp3
+:productVersion: 5.0
+:WildFlyQuickStartRepoTag: XP_5.0.0.GA
 endif::[]
 
 ifdef::ProductRelease,EAPXPRelease[]
@@ -62,14 +58,12 @@ ifndef::ProductRelease,EAPXPRelease[]
 :productNameFull: WildFly Application Server
 :ProductShortName: {productName}
 :jbossHomeName: WILDFLY_HOME
-:productVersion: 34
-:productImageVersion: 34.0
+:productVersion: 38
 :githubRepoUrl: https://github.com/wildfly/quickstart/
 :githubRepoCodeUrl: https://github.com/wildfly/quickstart.git
-:WildFlyQuickStartRepoTag: 34.0.0.Beta1
+:WildFlyQuickStartRepoTag: 37.0.0.Final
 :DocInfoProductName: Red Hat JBoss Enterprise Application Platform
 :DocInfoProductNameURL: red_hat_jboss_enterprise_application_platform
-:DocInfoProductNumber: 8.0
 :DocInfoPreviousProductName: jboss-enterprise-application-platform
 :helmRepoName: wildfly
 :helmRepoUrl: http://docs.wildfly.org/wildfly-charts/
@@ -80,33 +74,15 @@ endif::[]
 :source: {githubRepoUrl}
 
 // Values for Openshift S2i sections attributes
-:CDProductName:  {productNameFull} for OpenShift
-:CDProductShortName: {ProductShortName} for OpenShift
-:CDProductTitle: {CDProductName}
-:CDProductNameSentence: Openshift release for {ProductShortName}
-:CDProductAcronym: {CDProductShortName}
-:CDProductVersion: {productVersion}
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {EapForOpenshiftBookName} Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {xpaasproduct} Online
-:xpaasproduct-shortname: {CDProductShortName}
-:xpaasproductOpenShiftOnline-shortname: {xpaasproduct-shortname} Online
+:xpaasproduct-shortname: {ProductShortName} for OpenShift
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: Getting Started with {ProductShortName} for OpenShift Container Platform
 :EapForOpenshiftOnlineBookName: Getting Started with {ProductShortName} for OpenShift Online
 :OpenShiftOnlinePlatformName: Red Hat OpenShift Container Platform
 :OpenShiftOnlineName: Red Hat OpenShift Online
-:ImagePrefixVersion: eap80
-:ImageandTemplateImportBaseURL: https://raw.githubusercontent.com/jboss-container-images/jboss-eap-openshift-templates
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepo: https://github.com/jboss-developer/jboss-eap-quickstarts
-:EAPQuickStartRepoRef: 8.0.x
-:EAPQuickStartRepoTag: EAP_8.0.0.GA
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_online/
@@ -116,37 +92,22 @@ ifdef::EAPXPRelease[]
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {productNameFull} for OpenShift Online
-:xpaasproduct-shortname: {ProductShortName} for OpenShift
-:xpaasproductOpenShiftOnline-shortname: {ProductShortName} for OpenShift Online
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
-:ImagePrefixVersion: eap-xp3
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepoRef: xp-3.0.x
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 endif::[]
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
-:ImageandTemplateImportURL: https://raw.githubusercontent.com/wildfly/wildfly-s2i/v{productVersion}.0/
-endif::[]
-
 //*************************
 // Other values
 //*************************
-:buildRequirements: Java 11.0 (Java SDK 11) or later and Maven 3.6.0 or later
-:jbdsEapServerName: Red Hat JBoss Enterprise Application Platform 7.3
+:buildRequirements: Java SE 17.0 or later, and Maven 3.6.0 or later
 :javaVersion: Jakarta EE 10
 ifdef::EAPXPRelease[]
 :javaVersion: Eclipse MicroProfile
 endif::[]
-:githubRepoBranch: master
 :guidesBaseUrl: https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/
 :useEclipseUrl: {guidesBaseUrl}USE_JBDS.adoc#use_red_hat_jboss_developer_studio_or_eclipse_to_run_the_quickstarts
 :useEclipseDeployJavaClientDocUrl: {guidesBaseUrl}USE_JBDS.adoc#deploy_and_undeploy_a_quickstart_containing_server_and_java_client_projects
@@ -168,35 +129,6 @@ endif::[]
 :configureBytemanQuickstartDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
 :configureBytemanHaltDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#use_byteman_to_halt_the_application[
 :configureBytemanQuickstartsDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
-
-:EESubsystemNamespace: urn:jboss:domain:ee:4.0
-:IiopOpenJdkSubsystemNamespace: urn:jboss:domain:iiop-openjdk:2.0
-:MailSubsystemNamespace: urn:jboss:domain:mail:3.0
-:SingletonSubsystemNamespace: urn:jboss:domain:singleton:1.0
-:TransactionsSubsystemNamespace: urn:jboss:domain:transactions:4.0
-
-// LinkProductDocHome: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
-:LinkProductDocHome: https://access.redhat.com/documentation/en/jboss-enterprise-application-platform-continuous-delivery
-:LinkConfigGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/configuration_guide/
-:LinkDevelopmentGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/development_guide/
-:LinkGettingStartedGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_guide/
-:LinkOpenShiftWelcome: https://docs.openshift.com/online/welcome/index.html
-:LinkOpenShiftSignup: https://docs.openshift.com/online/getting_started/choose_a_plan.html
-:OpenShiftTemplateName: JBoss EAP CD (no https)
-
-:ConfigBookName: Configuration Guide
-:DevelopmentBookName: Development Guide
-:GettingStartedBookName: Getting Started Guide
-
-:JBDSProductName: Red Hat CodeReady Studio
-:JBDSVersion: 12.15
-:LinkJBDSInstall:  https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/installation_guide/
-:JBDSInstallBookName: Installation Guide
-:LinkJBDSGettingStarted: https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/getting_started_with_codeready_studio_tools/
-:JBDSGettingStartedBookName: Getting Started with CodeReady Studio Tools
-
-// Enable Rendering of Glow configuration in plugin examples
-:portedToGlow: true
 
 = tasks-jsf: JSF, JPA quickstart
 :author: Lukas Fryc
@@ -544,17 +476,6 @@ You should see a message in the server log indicating that the archive deployed 
 
 The application will be running at the following URL http://localhost:8080/{artifactId}/.
 
-=== Server Log: Expected Warnings and Errors
-
-You will see the following warnings in the server log. You can ignore these warnings.
-
-[source,options="nowrap"]
-----
-WFLYJCA0091: -ds.xml file deployments are deprecated. Support may be removed in a future version.
-
-HHH000431: Unable to determine H2 database version, certain features may not work
-----
-
 // Server Distribution Testing
 :leveloffset: +2
 
@@ -600,7 +521,6 @@ $ mvn wildfly:undeploy
 :leveloffset!:
 
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 :leveloffset: +1
 
 [[build_and_run_the_quickstart_with_provisioned_server]]
@@ -623,190 +543,97 @@ ifndef::deploymentDir[:deploymentTargetDir: target]
 ifdef::deploymentDir[:deploymentTargetDir: {deploymentDir}/target]
 endif::deploymentTargetDir[]
 
-Instead of using a standard {productName} server distribution, you can alternatively provision a {productName} server to deploy and run the quickstart, by activating the Maven profile named `provisioned-server` when building the quickstart:
-
-[source,subs="attributes+",options="nowrap"]
-----
-$ mvn {mavenServerProvisioningCommand} -Pprovisioned-server
-----
-
-The provisioned {productName} server, with the quickstart deployed, can then be found in the `{deploymentTargetDir}/server` directory, and its usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
-
-ifdef::addQuickstartUser[]
-The quickstart user should be added before running the provisioned server:
-[source,subs="+quotes,attributes+",options="nowrap"]
-----
-$ {deploymentTargetDir}/server/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!' {app-group-command}
-----
-[NOTE]
-====
-For Windows, use the `__{jbossHomeName}__\bin\add-user.bat` script.
-====
-endif::[]
-
-ifdef::addQuickstartAdmin[]
-The quickstart admin should be added before running the provisioned server:
-[source,subs="+quotes,attributes+",options="nowrap"]
-----
-$ {deploymentTargetDir}/server/bin/add-user.sh -a -u 'quickstartAdmin' -p 'adminPwd1!' {admin-group-command}
-----
-[NOTE]
-====
-For Windows, use the `__{jbossHomeName}__\bin\add-user.bat` script.
-====
-endif::[]
-
-The server provisioning functionality is provided by the WildFly Maven Plugin, and you may find its configuration in the quickstart `pom.xml`:
-
-[source,xml,subs="attributes+"]
-----
-        <profile>
-            <id>provisioned-server</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <configuration>
-                            <discover-provisioning-info>
-                                <version>${version.server}</version>
-                            </discover-provisioning-info>
-                            <!--
-                                Rename the output war to ROOT.war before adding it to the server, so that the
-                                application is deployed in the root web context.
-                            -->
-                            <name>ROOT.war</name>
-                            <add-ons>...</add-ons>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    ...
-                </plugins>
-            </build>
-        </profile>
-----
-The plugin uses https://github.com/wildfly/wildfly-glow[WildFly Glow] to discover the feature packs and layers required to run the application, and provisions a server containing those layers.
-
-If you get an error or the server is missing some functionality which cannot be auto-discovered, you can download the https://github.com/wildfly/wildfly-glow/releases/tag[WildFly Glow CLI] and run the following command to see more information about what add-ons  are available:
-
-[source,shell]
-----
-wildfly-glow show-add-ons
-----
-
-[NOTE]
-====
-Since the plugin configuration above deploys quickstart on root web context of the provisioned server, the URL to access the application should not have the `/{artifactId}` path segment after `HOST:PORT`.
-====
-
-// Server Provisioning Testing
-:leveloffset: +1
-
-[[run_the_integration_tests_with_provisioned_server_]]
-= Run the Integration Tests with a provisioned server
-
-//******************************************************************************
-// This template sets attributes for the different standalone server profiles.
-//
-// You must define the `standalone-server-type`. Supported values are:
-//    default
-//    full
-//    full-ha
-//    ha
-//    microprofile
-//    custom
-//******************************************************************************
-
-// Standalone server with the default profile.
-ifeval::["{standalone-server-type}"=="default"]
-:serverProfile: default profile
-:configFileName: standalone/configuration/standalone.xml
-:serverArguments:
-endif::[]
-
-// Standalone server with the full profile.
-ifeval::["{standalone-server-type}"=="full"]
-:serverProfile: full profile
-:configFileName: standalone/configuration/standalone-full.xml
-:serverArguments:  -c standalone-full.xml
-endif::[]
-
-// Standalone server with the full HA profile.
-ifeval::["{standalone-server-type}"=="full-ha"]
-:serverProfile: full HA profile
-:configFileName: standalone/configuration/standalone-full-ha.xml
-:serverArguments:  -c standalone-full-ha.xml
-endif::[]
-
-// Start the standalone server with the HA profile.
-ifeval::["{standalone-server-type}"=="ha"]
-:serverProfile: HA profile
-:configFileName: standalone/configuration/standalone-ha.xml
-:serverArguments:  -c standalone-ha.xml
-endif::[]
-
-// Start the standalone server with the Eclipse MicroProfile profile.
-ifeval::["{standalone-server-type}"=="microprofile"]
-:serverProfile: MicroProfile profile
-:configFileName: standalone/configuration/standalone-microprofile.xml
-:serverArguments:  -c standalone-microprofile.xml
-endif::[]
-
-// Standalone server with the custom profile.
-// NOTE: This profile requires that you define the `serverArguments` variable
-// within the quickstart README.adoc file. For example:
-//  :serverArguments: --server-config=../../docs/examples/configs/standalone-xts.xml
-ifeval::["{standalone-server-type}"=="custom"]
-:serverProfile: custom profile
-endif::[]
-
-// If there is no match, use the default profile.
-ifndef::serverProfile[]
-:standalone-server-type:  default
-:serverProfile: default profile
-:configFileName: standalone/configuration/standalone.xml
-:serverArguments:
-endif::serverProfile[]
-
-ifndef::mavenServerProvisioningCommand[]
-ifeval::["{archiveType}"=="ear"]
-:mavenServerProvisioningCommand: clean install
-endif::[]
-ifeval::["{archiveType}"=="war"]
-:mavenServerProvisioningCommand: clean package
-endif::[]
-ifeval::["{archiveType}"=="jar"]
-:mavenServerProvisioningCommand: clean install
-endif::[]
-endif::mavenServerProvisioningCommand[]
-
-ifndef::deploymentTargetDir[]
-ifndef::deploymentDir[:deploymentTargetDir: target]
-ifdef::deploymentDir[:deploymentTargetDir: {deploymentDir}/target]
-endif::deploymentTargetDir[]
-
-ifndef::server_provisioning_server_host[]
-:server_provisioning_server_host: http://localhost:8080
-endif::server_provisioning_server_host[]
-
 ifndef::extraStartParams[:extraStartParams: ]
 ifndef::extraProvisioningTestParams[:extraProvisioningTestParams: ]
 
-The integration tests included with this quickstart, which verify that the quickstart runs correctly, may also be run with a provisioned server.
+Instead of using a standard {productName} server distribution, you can alternatively provision a {productName} server to deploy and run the quickstart. The functionality is provided by the WildFly Maven Plugin, and you may find its configuration in the quickstart `pom.xml`:
 
-Follow these steps to run the integration tests.
+ifndef::ProductRelease[]
+[source,xml,subs="attributes+"]
+----
+<profile>
+    <id>provisioned-server</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <discover-provisioning-info>
+                        <version>${version.server}</version>
+                    </discover-provisioning-info>
+                    <add-ons>...</add-ons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
+----
+endif::[]
+
+ifdef::ProductRelease[]
+[source,xml,subs="attributes+"]
+----
+<profile>
+    <id>provisioned-server</id>
+    <activation>
+        <activeByDefault>true</activeByDefault>
+    </activation>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.eap.plugins</groupId>
+                <artifactId>eap-maven-plugin</artifactId>
+                <configuration>
+                    ...
+                    <feature-packs>
+                        <feature-pack>
+                            <location>org.jboss.eap:wildfly-ee-galleon-pack</location>
+                        </feature-pack>
+                        ...
+                    </feature-packs>
+                    <layers>...</layers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
+----
+endif::[]
+
+[NOTE]
+====
+When built, the provisioned {productName} server can be found in the `{deploymentTargetDir}/server` directory, and its usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
+====
+
+Follow these steps to run the quickstart using the provisioned server.
+
+.Procedure
 
 . Make sure the server is provisioned.
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-$ mvn {mavenServerProvisioningCommand} -Pprovisioned-server
+$ mvn {mavenServerProvisioningCommand}
 ----
 
 ifdef::addQuickstartUser[]
@@ -831,29 +658,29 @@ For Windows, use the `__{jbossHomeName}__\bin\add-user.bat` script.
 ====
 endif::[]
 
-. Start the {productName} provisioned server, this time using the {productName} Maven Plugin, which is recommended for testing due to simpler automation. The path to the provisioned server should be specified using the `jbossHome` system property.
+. Start the {productName} provisioned server, using the WildFly Maven Plugin `start` goal.
 +
 ifndef::deploymentDir[]
 [source,subs="attributes+",options="nowrap"]
 ----
-$ mvn wildfly:start -DjbossHome=target/server {extraStartParams}
+$ mvn wildfly:start {extraStartParams}
 ----
 endif::[]
 ifdef::deploymentDir[]
 [source,subs="attributes+",options="nowrap"]
 ----
-$ mvn -f {deploymentDir}/pom.xml wildfly:start -DjbossHome={deploymentDir}/target/server {extraStartParams}
+$ mvn -f {deploymentDir}/pom.xml wildfly:start {extraStartParams}
 ----
 endif::[]
 
-. Type the following command to run the `verify` goal with the `integration-testing` profile activated, and specifying the quickstart's URL using the `server.host` system property, which for a provisioned server by default is `{server_provisioning_server_host}`.
+. Type the following command to run the integration tests.
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-$ mvn verify -Pintegration-testing -Dserver.host={server_provisioning_server_host} {extraProvisioningTestParams}
+$ mvn verify -Pintegration-testing {extraProvisioningTestParams}
 ----
 
-. Shutdown the {productName} provisioned server, this time using the {productName} Maven Plugin too.
+. Shut down the {productName} provisioned server.
 +
 ifndef::deploymentDir[]
 [source,subs="attributes+",options="nowrap"]
@@ -868,10 +695,7 @@ $ mvn -f {deploymentDir}/pom.xml wildfly:shutdown
 ----
 endif::[]
 
-:leveloffset: 1
-
 :leveloffset!:
-endif::[]
 :leveloffset: +1
 
 :cloud-platform: OpenShift
@@ -901,84 +725,70 @@ ifndef::ProductRelease,EAPXPRelease[]
 
 [source,xml,subs="attributes+"]
 ----
-        <profile>
-            <id>openshift</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <configuration>
-                            <discover-provisioning-info>
-                                <version>${version.server}</version>
-                                <context>cloud</context>
-                            </discover-provisioning-info>
-                            <!--
-                                The parent POM's 'openshift' profile renames the output archive to ROOT.war so that the
-                                application is deployed in the root web context. Add ROOT.war to the server.
-                            -->
-                            <filename>ROOT.war</filename>
-                            <add-ons>...</add-ons>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    ...
-                </plugins>
-            </build>
-        </profile>
+<profile>
+    <id>openshift</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <discover-provisioning-info>
+                        <version>${version.server}</version>
+                        <context>cloud</context>
+                    </discover-provisioning-info>
+                    <add-ons>...</add-ons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
 ----
 You may note that unlike the `provisioned-server` profile it uses the cloud context which enables a configuration tuned for {cloud-platform} environment.
-
-The plugin uses https://github.com/wildfly/wildfly-glow[WildFly Glow] to discover the feature packs and layers required to run the application, and provisions a server containing those layers.
-
-If you get an error or the server is missing some functionality which cannot be auto-discovered, you can download the https://github.com/wildfly/wildfly-glow/releases[WildFly Glow CLI] and run the following command to see more information about what add-ons are available:
-[source,shell]
-----
-wildfly-glow show-add-ons
-----
 endif::ProductRelease,EAPXPRelease[]
 
 ifdef::ProductRelease,EAPXPRelease[]
 [source,xml,subs="attributes+"]
 ----
-        <profile>
-            <id>openshift</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jboss.eap.plugins</groupId>
-                        <artifactId>eap-maven-plugin</artifactId>
-                        <configuration>
-                            ...
-                            <feature-packs>
-                                <feature-pack>
-                                    <location>org.jboss.eap:wildfly-ee-galleon-pack</location>
-                                </feature-pack>
-                                <feature-pack>
-                                    <location>org.jboss.eap.cloud:eap-cloud-galleon-pack</location>
-                                </feature-pack>
-                            </feature-packs>
-                            <layers>...</layers>
-                            <name>ROOT.war</name>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<profile>
+    <id>openshift</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.eap.plugins</groupId>
+                <artifactId>eap-maven-plugin</artifactId>
+                <configuration>
                     ...
-                </plugins>
-            </build>
-        </profile>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>org.jboss.eap:wildfly-ee-galleon-pack</location>
+                        </feature-pack>
+                        <feature-pack>
+                            <location>org.jboss.eap.cloud:eap-cloud-galleon-pack</location>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers>...</layers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
 ----
 You may note that it uses the cloud feature pack which enables a configuration tuned for the {cloud-platform} environment.
 endif::[]
@@ -990,7 +800,7 @@ endif::[]
 [[getting_started_with_helm]]
 = Getting Started with {xpaasproduct-shortname} and Helm Charts
 
-This section contains the basic instructions to build and deploy this quickstart to {xpaasproduct-shortname} or {xpaasproductOpenShiftOnline-shortname} using Helm Charts.
+This section contains the basic instructions to build and deploy this quickstart to {xpaasproduct-shortname} using Helm Charts.
 
 [[prerequisites_helm_openshift]]
 == Prerequisites
@@ -1000,9 +810,9 @@ ifndef::kubernetes[]
 endif::[]
 * https://helm.sh[Helm] must be installed to deploy the backend on {cloud-platform}.
 
-Once you have installed Helm, you need to add the repository that provides Helm Charts for {productName}.
+Once you have installed Helm, you need to add the repository that provides Helm Charts for {ProductShortName}.
 
-ifndef::ProductRelease,EAPXPRelease[]
+ifndef::ProductRelease[]
 [source,options="nowrap"]
 ----
 $ helm repo add wildfly https://docs.wildfly.org/wildfly-charts/
@@ -1020,17 +830,7 @@ $ helm repo add jboss-eap https://jbossas.github.io/eap-charts/
 "jboss-eap" has been added to your repositories
 $ helm search repo jboss-eap
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-{helmChartName}         ...             ...             A Helm chart to build and deploy EAP {productVersion} applications
-----
-endif::[]
-ifdef::EAPXPRelease[]
-[source,options="nowrap",subs="+attributes"]
-----
-$ helm repo add jboss-eap https://jbossas.github.io/eap-charts/
-"jboss-eap" has been added to your repositories
-$ helm search repo jboss-eap
-NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-{helmChartName}         ...             ...             A Helm chart to build and deploy EAP XP {productVersion} applications
+{helmChartName}         ...             ...             A Helm chart to build and deploy EAP applications
 ----
 endif::[]
 
@@ -1072,7 +872,7 @@ endif::[]
 ifndef::kubernetes[]
 Log in to your OpenShift instance using the `oc login` command.
 endif::[]
-The backend will be built and deployed on {cloud-platform} with a Helm Chart for {productName}.
+The backend will be built and deployed on {cloud-platform} with a Helm Chart for {ProductShortName}.
 
 
 ifndef::kubernetes[]
@@ -1187,10 +987,6 @@ kubectl port-forward service/{helm-app-name} 8080:8080
 The server can now be accessed via `http://localhost:8080` from outside Kubernetes. Note that the command to create the port-forward will not return, so it is easiest to run this in a separate terminal.
 
 endif::[]
-[NOTE]
-====
-The Maven profile named `openshift` is used by the Helm chart to provision the server with the quickstart deployed on the root web context, and thus the application should be accessed with the URL without the `/{artifactId}` path segment after `HOST:PORT`.
-====
 
 ifdef::openshift+post-helm-install-actions-openshift[]
 include::{post-helm-install-actions-openshift}[leveloffset=+1]
@@ -1294,84 +1090,70 @@ ifndef::ProductRelease,EAPXPRelease[]
 
 [source,xml,subs="attributes+"]
 ----
-        <profile>
-            <id>openshift</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.wildfly.plugins</groupId>
-                        <artifactId>wildfly-maven-plugin</artifactId>
-                        <configuration>
-                            <discover-provisioning-info>
-                                <version>${version.server}</version>
-                                <context>cloud</context>
-                            </discover-provisioning-info>
-                            <!--
-                                The parent POM's 'openshift' profile renames the output archive to ROOT.war so that the
-                                application is deployed in the root web context. Add ROOT.war to the server.
-                            -->
-                            <filename>ROOT.war</filename>
-                            <add-ons>...</add-ons>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    ...
-                </plugins>
-            </build>
-        </profile>
+<profile>
+    <id>openshift</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <configuration>
+                    <discover-provisioning-info>
+                        <version>${version.server}</version>
+                        <context>cloud</context>
+                    </discover-provisioning-info>
+                    <add-ons>...</add-ons>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
 ----
 You may note that unlike the `provisioned-server` profile it uses the cloud context which enables a configuration tuned for {cloud-platform} environment.
-
-The plugin uses https://github.com/wildfly/wildfly-glow[WildFly Glow] to discover the feature packs and layers required to run the application, and provisions a server containing those layers.
-
-If you get an error or the server is missing some functionality which cannot be auto-discovered, you can download the https://github.com/wildfly/wildfly-glow/releases[WildFly Glow CLI] and run the following command to see more information about what add-ons are available:
-[source,shell]
-----
-wildfly-glow show-add-ons
-----
 endif::ProductRelease,EAPXPRelease[]
 
 ifdef::ProductRelease,EAPXPRelease[]
 [source,xml,subs="attributes+"]
 ----
-        <profile>
-            <id>openshift</id>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.jboss.eap.plugins</groupId>
-                        <artifactId>eap-maven-plugin</artifactId>
-                        <configuration>
-                            ...
-                            <feature-packs>
-                                <feature-pack>
-                                    <location>org.jboss.eap:wildfly-ee-galleon-pack</location>
-                                </feature-pack>
-                                <feature-pack>
-                                    <location>org.jboss.eap.cloud:eap-cloud-galleon-pack</location>
-                                </feature-pack>
-                            </feature-packs>
-                            <layers>...</layers>
-                            <name>ROOT.war</name>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <goals>
-                                    <goal>package</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
+<profile>
+    <id>openshift</id>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jboss.eap.plugins</groupId>
+                <artifactId>eap-maven-plugin</artifactId>
+                <configuration>
                     ...
-                </plugins>
-            </build>
-        </profile>
+                    <feature-packs>
+                        <feature-pack>
+                            <location>org.jboss.eap:wildfly-ee-galleon-pack</location>
+                        </feature-pack>
+                        <feature-pack>
+                            <location>org.jboss.eap.cloud:eap-cloud-galleon-pack</location>
+                        </feature-pack>
+                    </feature-packs>
+                    <layers>...</layers>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>package</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            ...
+        </plugins>
+    </build>
+</profile>
 ----
 You may note that it uses the cloud feature pack which enables a configuration tuned for the {cloud-platform} environment.
 endif::[]
@@ -1424,9 +1206,9 @@ ifndef::kubernetes[]
 endif::[]
 * https://helm.sh[Helm] must be installed to deploy the backend on {cloud-platform}.
 
-Once you have installed Helm, you need to add the repository that provides Helm Charts for {productName}.
+Once you have installed Helm, you need to add the repository that provides Helm Charts for {ProductShortName}.
 
-ifndef::ProductRelease,EAPXPRelease[]
+ifndef::ProductRelease[]
 [source,options="nowrap"]
 ----
 $ helm repo add wildfly https://docs.wildfly.org/wildfly-charts/
@@ -1444,17 +1226,7 @@ $ helm repo add jboss-eap https://jbossas.github.io/eap-charts/
 "jboss-eap" has been added to your repositories
 $ helm search repo jboss-eap
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-{helmChartName}         ...             ...             A Helm chart to build and deploy EAP {productVersion} applications
-----
-endif::[]
-ifdef::EAPXPRelease[]
-[source,options="nowrap",subs="+attributes"]
-----
-$ helm repo add jboss-eap https://jbossas.github.io/eap-charts/
-"jboss-eap" has been added to your repositories
-$ helm search repo jboss-eap
-NAME                    CHART VERSION   APP VERSION     DESCRIPTION
-{helmChartName}         ...             ...             A Helm chart to build and deploy EAP XP {productVersion} applications
+{helmChartName}         ...             ...             A Helm chart to build and deploy EAP applications
 ----
 endif::[]
 
@@ -1496,7 +1268,7 @@ endif::[]
 ifndef::kubernetes[]
 Log in to your OpenShift instance using the `oc login` command.
 endif::[]
-The backend will be built and deployed on {cloud-platform} with a Helm Chart for {productName}.
+The backend will be built and deployed on {cloud-platform} with a Helm Chart for {ProductShortName}.
 
 
 ifndef::kubernetes[]
@@ -1611,10 +1383,6 @@ kubectl port-forward service/{helm-app-name} 8080:8080
 The server can now be accessed via `http://localhost:8080` from outside Kubernetes. Note that the command to create the port-forward will not return, so it is easiest to run this in a separate terminal.
 
 endif::[]
-[NOTE]
-====
-The Maven profile named `openshift` is used by the Helm chart to provision the server with the quickstart deployed on the root web context, and thus the application should be accessed with the URL without the `/{artifactId}` path segment after `HOST:PORT`.
-====
 
 ifdef::openshift+post-helm-install-actions-openshift[]
 include::{post-helm-install-actions-openshift}[leveloffset=+1]

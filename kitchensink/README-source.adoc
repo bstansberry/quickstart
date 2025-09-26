@@ -3,9 +3,8 @@ include::../shared-doc/attributes.adoc[]
 = kitchensink: Assortment of technologies
 :author: Pete Muir
 :level: Intermediate
-:technologies: CDI, JSF, JPA, EJB, JAX-RS, BV
+:technologies: CDI, JSF, JPA, EJB, Jakarta REST, BV
 :openshift: true
-:portedToGlow: true
 
 [abstract]
 The `kitchensink` quickstart demonstrates a localized {javaVersion} web-enabled database application using JSF, CDI, EJB, JPA, and Bean Validation.
@@ -13,13 +12,12 @@ The `kitchensink` quickstart demonstrates a localized {javaVersion} web-enabled 
 :standalone-server-type: default
 :archiveType: war
 :uses-h2:
-:uses-ds-xml:
 
 == What is it?
 
 The `kitchensink` quickstart is a deployable Maven 3 project designed to help you get your foot in the door developing with {javaVersion} on {productNameFull}.
 
-It demonstrates how to create a _localized_ {javaVersion} compliant application using JSF, CDI, JAX-RS, EJB, JPA, and Bean Validation. A localized application is one that supports multiple languages. It also includes a persistence unit and some sample persistence and transaction code to introduce you to database access in enterprise Java.
+It demonstrates how to create a _localized_ {javaVersion} compliant application using JSF, CDI, Jakarta REST, EJB, JPA, and Bean Validation. A localized application is one that supports multiple languages. It also includes a persistence unit and some sample persistence and transaction code to introduce you to database access in enterprise Java.
 
 This quickstart has been enhanced to provide localization of labels and messages. A user sets the preferred language choice in the browser and, if the application supports that language, the application web page is rendered in that language. For demonstration purposes, this quickstart has been tranlated into French(fr) and Spanish (es) using http://translate.google.com, so the translations may not be ideal.
 
@@ -131,23 +129,12 @@ include::../shared-doc/build-and-deploy-the-quickstart.adoc[leveloffset=+2]
 
 The application will be running at the following URL: http://localhost:8080/{artifactId}/.
 
-=== Server Log: Expected Warnings and Errors
-
-You will see the following warnings in the server log. You can ignore these warnings.
-
-[source,options="nowrap"]
-----
-WFLYJCA0091: -ds.xml file deployments are deprecated. Support may be removed in a future version.
-----
-
 // Server Distribution Testing
 include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+2]
 // Undeploy the Quickstart
 include::../shared-doc/undeploy-the-quickstart.adoc[leveloffset=+2]
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 include::../shared-doc/build-and-run-the-quickstart-with-provisioned-server.adoc[leveloffset=+1]
-endif::[]
 include::../shared-doc/build-and-run-the-quickstart-with-openshift.adoc[leveloffset=+1]
 ifndef::ProductRelease,EAPXPRelease[]
 //Kubernetes

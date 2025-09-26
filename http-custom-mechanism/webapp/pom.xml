@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.wildfly.quickstarts</groupId>
         <artifactId>http-custom-mechanism</artifactId>
-        <version>34.0.0.Beta1</version>
+        <version>38.0.0.Beta1-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>http-custom-mechanism-webapp</artifactId>
@@ -38,12 +38,6 @@
     </licenses>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.wildfly.security</groupId>
-            <artifactId>wildfly-elytron</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.wildfly.common</groupId>
             <artifactId>wildfly-common</artifactId>
@@ -62,9 +56,17 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
+    </build>
+
     <profiles>
         <profile>
             <id>provisioned-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -77,17 +79,16 @@
                                     <addOn>wildfly-cli</addOn>
                                 </addOns>
                             </discover-provisioning-info>
-                            <!--
-                                Rename the output war to ROOT.war before adding it to the server, so that the
-                                application is deployed in the root web context.
-                            -->
-                            <name>ROOT.war</name>
                             <packaging-scripts>
                                 <packaging-script>
+                                    <commands>
+                                        <!-- If you need to change this command please change also in ../add-custom-module.cli -->
+                                        <command>module add --name=org.jboss.as.quickstart.http_custom_mechanism.custom-http-mechanism --resources=${project.basedir}/../custom-module/target/custom-module.jar --dependencies=org.wildfly.security.elytron</command>
+                                    </commands>
                                     <scripts>
-                                        <script>${basedir}/../add-custom-module.cli</script>
                                         <script>${basedir}/../configure-elytron.cli</script>
                                     </scripts>
+                                    <resolve-expressions>true</resolve-expressions>
                                 </packaging-script>
                             </packaging-scripts>
                         </configuration>

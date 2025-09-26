@@ -25,25 +25,24 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
     <artifactId>microprofile-reactive-messaging-kafka</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>Quickstart: microprofile-reactive-messaging-kafka</name>
 
     <properties>
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
         <!-- the version for the Server -->
-        <version.server>34.0.0.Beta1</version.server>
-        <!-- The versions for BOMs, Packs and Plugins -->
+        <version.server>37.0.1.Final</version.server>
+        <!-- the versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
         <version.bom.expansion>${version.server}</version.bom.expansion>
-        <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
-        <!-- The versions for other Dependencies and Plugins -->
-        <version.io.smallrye-config>3.0.0</version.io.smallrye-config>
-        <version.org.jboss.resteasy.microprofile.rest-client>2.0.0.Final</version.org.jboss.resteasy.microprofile.rest-client>
+        <version.plugin.wildfly>5.1.4.Final</version.plugin.wildfly>
     </properties>
 
     <dependencyManagement>
@@ -124,7 +123,7 @@
             <artifactId>jakarta.transaction-api</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!-- Import the JAX-RS API, we use provided scope as the API is included in WildFly -->
+        <!-- Import the Jakarta REST API, we use provided scope as the API is included in WildFly -->
         <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
@@ -165,26 +164,25 @@
         <dependency>
             <groupId>io.smallrye.config</groupId>
             <artifactId>smallrye-config-core</artifactId>
-            <version>${version.io.smallrye-config}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.jboss.resteasy.microprofile</groupId>
             <artifactId>microprofile-rest-client-base</artifactId>
-            <version>${version.org.jboss.resteasy.microprofile.rest-client}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.jboss.resteasy.microprofile</groupId>
             <artifactId>microprofile-rest-client</artifactId>
-            <version>${version.org.jboss.resteasy.microprofile.rest-client}</version>
             <scope>test</scope>
         </dependency>
 
     </dependencies>
 
     <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -212,6 +210,9 @@
     <profiles>
         <profile>
             <id>bootable-jar</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -222,11 +223,6 @@
                                 <version>${version.server}</version>
                             </discover-provisioning-info>
                             <bootable-jar>true</bootable-jar>
-                            <!--
-                                Rename the output war to ROOT.war before adding it to the server, so that the
-                                application is deployed in the root web context.
-                            -->
-                            <name>ROOT.war</name>
                         </configuration>
                         <executions>
                             <execution>
@@ -252,17 +248,23 @@
                                 <version>${version.server}</version>
                                 <context>cloud</context>
                             </discover-provisioning-info>
-                            <!--
-                                The parent POM's 'openshift' profile renames the output archive to ROOT.war so that the
-                                application is deployed in the root web context. Add ROOT.war to the server.
-                            -->
-                            <filename>ROOT.war</filename>
                         </configuration>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>package</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- do not attach sources to openshift deployments -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>

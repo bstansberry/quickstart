@@ -25,12 +25,12 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
 
     <artifactId>tasks-jsf</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Quickstart: tasks-jsf</name>
     <description>This project demonstrates how to use JPA persistence to manage tasks with JSF as view layer</description>
@@ -44,14 +44,15 @@
     </licenses>
 
     <properties>
-        <version.server>34.0.0.Beta1</version.server>
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- the version for the Server -->
+        <version.server>37.0.1.Final</version.server>
         <!-- the versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
-        <version.pack.cloud>7.0.0.Final</version.pack.cloud>
-        <version.pack.datasources>8.0.0.Final</version.pack.datasources>
-        <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
-        <!-- the versions for test dependencies -->
-        <version.org.junit.jupiter>5.9.1</version.org.junit.jupiter>
+        <version.plugin.wildfly>5.1.4.Final</version.plugin.wildfly>
+        <!-- the versions for other Dependencies and Plugins -->
+        <version.org.junit.jupiter>5.9.3</version.org.junit.jupiter>
     </properties>
 
     <dependencyManagement>
@@ -110,6 +111,8 @@
     </dependencies>
 
     <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -117,33 +120,43 @@
                     <artifactId>wildfly-maven-plugin</artifactId>
                     <version>${version.plugin.wildfly}</version>
                 </plugin>
+
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <!-- specifies that the deployment depends on server module com.h2database.h2 -->
+                            <Dependencies>com.h2database.h2</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
 
     <profiles>
         <profile>
             <id>provisioned-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
                         <configuration>
-                            <feature-packs>
-                                <feature-pack>
-                                    <location>org.wildfly:wildfly-galleon-pack:${version.server}</location>
-                                </feature-pack>
-                                <feature-pack>
-                                    <location>org.wildfly:wildfly-datasources-galleon-pack:${version.pack.datasources}</location>
-                                </feature-pack>
-                            </feature-packs>
-                            <layers>
-                                <layer>cloud-server</layer>
-                                <layer>h2-datasource</layer>
-                                <layer>jsf</layer>
-                            </layers>
-                            <name>ROOT.war</name>
+                            <discover-provisioning-info>
+                                <addOns>
+                                    <addOn>h2-database</addOn>
+                                </addOns>
+                                <version>${version.server}</version>
+                            </discover-provisioning-info>
                         </configuration>
                         <executions>
                             <execution>
@@ -164,29 +177,30 @@
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
                         <configuration>
-                            <feature-packs>
-                                <feature-pack>
-                                    <location>org.wildfly:wildfly-galleon-pack:${version.server}</location>
-                                </feature-pack>
-                                <feature-pack>
-                                    <location>org.wildfly.cloud:wildfly-cloud-galleon-pack:${version.pack.cloud}</location>
-                                </feature-pack>
-                                <feature-pack>
-                                    <location>org.wildfly:wildfly-datasources-galleon-pack:${version.pack.datasources}</location>
-                                </feature-pack>
-                            </feature-packs>
-                            <layers>
-                                <layer>cloud-server</layer>
-                                <layer>h2-datasource</layer>
-                                <layer>jsf</layer>
-                            </layers>
-                            <filename>ROOT.war</filename>
+                            <discover-provisioning-info>
+                                <version>${version.server}</version>
+                                <context>cloud</context>
+                                <addOns>
+                                    <addOn>h2-database</addOn>
+                                </addOns>
+                            </discover-provisioning-info>
                         </configuration>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>package</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- do not attach sources to openshift deployments -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>

@@ -27,7 +27,6 @@ ifdef::ProductRelease[]
 :productVersion: 8.0
 :DocInfoProductNumber: {productVersion}
 :WildFlyQuickStartRepoTag: 8.0.x
-:productImageVersion: 8.0.0
 :helmChartName: jboss-eap/eap8
 endif::[]
 
@@ -35,11 +34,8 @@ ifdef::EAPXPRelease[]
 // JBoss EAP XP release
 :productName: JBoss EAP XP
 :productNameFull: Red Hat JBoss Enterprise Application Platform expansion pack
-:productVersion: 3.0
-:DocInfoProductNumber: 7.4
-:WildFlyQuickStartRepoTag: XP_3.0.0.GA
-:productImageVersion: 3.0
-:helmChartName: jboss-eap/eap-xp3
+:productVersion: 5.0
+:WildFlyQuickStartRepoTag: XP_5.0.0.GA
 endif::[]
 
 ifdef::ProductRelease,EAPXPRelease[]
@@ -62,14 +58,12 @@ ifndef::ProductRelease,EAPXPRelease[]
 :productNameFull: WildFly Application Server
 :ProductShortName: {productName}
 :jbossHomeName: WILDFLY_HOME
-:productVersion: 34
-:productImageVersion: 34.0
+:productVersion: 38
 :githubRepoUrl: https://github.com/wildfly/quickstart/
 :githubRepoCodeUrl: https://github.com/wildfly/quickstart.git
-:WildFlyQuickStartRepoTag: 34.0.0.Beta1
+:WildFlyQuickStartRepoTag: 37.0.0.Final
 :DocInfoProductName: Red Hat JBoss Enterprise Application Platform
 :DocInfoProductNameURL: red_hat_jboss_enterprise_application_platform
-:DocInfoProductNumber: 8.0
 :DocInfoPreviousProductName: jboss-enterprise-application-platform
 :helmRepoName: wildfly
 :helmRepoUrl: http://docs.wildfly.org/wildfly-charts/
@@ -80,33 +74,15 @@ endif::[]
 :source: {githubRepoUrl}
 
 // Values for Openshift S2i sections attributes
-:CDProductName:  {productNameFull} for OpenShift
-:CDProductShortName: {ProductShortName} for OpenShift
-:CDProductTitle: {CDProductName}
-:CDProductNameSentence: Openshift release for {ProductShortName}
-:CDProductAcronym: {CDProductShortName}
-:CDProductVersion: {productVersion}
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {EapForOpenshiftBookName} Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {xpaasproduct} Online
-:xpaasproduct-shortname: {CDProductShortName}
-:xpaasproductOpenShiftOnline-shortname: {xpaasproduct-shortname} Online
+:xpaasproduct-shortname: {ProductShortName} for OpenShift
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: Getting Started with {ProductShortName} for OpenShift Container Platform
 :EapForOpenshiftOnlineBookName: Getting Started with {ProductShortName} for OpenShift Online
 :OpenShiftOnlinePlatformName: Red Hat OpenShift Container Platform
 :OpenShiftOnlineName: Red Hat OpenShift Online
-:ImagePrefixVersion: eap80
-:ImageandTemplateImportBaseURL: https://raw.githubusercontent.com/jboss-container-images/jboss-eap-openshift-templates
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepo: https://github.com/jboss-developer/jboss-eap-quickstarts
-:EAPQuickStartRepoRef: 8.0.x
-:EAPQuickStartRepoTag: EAP_8.0.0.GA
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_online/
@@ -116,37 +92,22 @@ ifdef::EAPXPRelease[]
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {productNameFull} for OpenShift Online
-:xpaasproduct-shortname: {ProductShortName} for OpenShift
-:xpaasproductOpenShiftOnline-shortname: {ProductShortName} for OpenShift Online
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
-:ImagePrefixVersion: eap-xp3
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepoRef: xp-3.0.x
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 endif::[]
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
-:ImageandTemplateImportURL: https://raw.githubusercontent.com/wildfly/wildfly-s2i/v{productVersion}.0/
-endif::[]
-
 //*************************
 // Other values
 //*************************
-:buildRequirements: Java 11.0 (Java SDK 11) or later and Maven 3.6.0 or later
-:jbdsEapServerName: Red Hat JBoss Enterprise Application Platform 7.3
+:buildRequirements: Java SE 17.0 or later, and Maven 3.6.0 or later
 :javaVersion: Jakarta EE 10
 ifdef::EAPXPRelease[]
 :javaVersion: Eclipse MicroProfile
 endif::[]
-:githubRepoBranch: master
 :guidesBaseUrl: https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/
 :useEclipseUrl: {guidesBaseUrl}USE_JBDS.adoc#use_red_hat_jboss_developer_studio_or_eclipse_to_run_the_quickstarts
 :useEclipseDeployJavaClientDocUrl: {guidesBaseUrl}USE_JBDS.adoc#deploy_and_undeploy_a_quickstart_containing_server_and_java_client_projects
@@ -169,41 +130,11 @@ endif::[]
 :configureBytemanHaltDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#use_byteman_to_halt_the_application[
 :configureBytemanQuickstartsDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
 
-:EESubsystemNamespace: urn:jboss:domain:ee:4.0
-:IiopOpenJdkSubsystemNamespace: urn:jboss:domain:iiop-openjdk:2.0
-:MailSubsystemNamespace: urn:jboss:domain:mail:3.0
-:SingletonSubsystemNamespace: urn:jboss:domain:singleton:1.0
-:TransactionsSubsystemNamespace: urn:jboss:domain:transactions:4.0
-
-// LinkProductDocHome: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
-:LinkProductDocHome: https://access.redhat.com/documentation/en/jboss-enterprise-application-platform-continuous-delivery
-:LinkConfigGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/configuration_guide/
-:LinkDevelopmentGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/development_guide/
-:LinkGettingStartedGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_guide/
-:LinkOpenShiftWelcome: https://docs.openshift.com/online/welcome/index.html
-:LinkOpenShiftSignup: https://docs.openshift.com/online/getting_started/choose_a_plan.html
-:OpenShiftTemplateName: JBoss EAP CD (no https)
-
-:ConfigBookName: Configuration Guide
-:DevelopmentBookName: Development Guide
-:GettingStartedBookName: Getting Started Guide
-
-:JBDSProductName: Red Hat CodeReady Studio
-:JBDSVersion: 12.15
-:LinkJBDSInstall:  https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/installation_guide/
-:JBDSInstallBookName: Installation Guide
-:LinkJBDSGettingStarted: https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/getting_started_with_codeready_studio_tools/
-:JBDSGettingStartedBookName: Getting Started with CodeReady Studio Tools
-
-// Enable Rendering of Glow configuration in plugin examples
-:portedToGlow: true
-
 = ejb-txn-remote-call: Demonstrates remote EJB calls and transaction propagation
 :author: Ondra Chaloupka
 :level: Intermediate
 :technologies: EJB, JTA, Clustering
 :openshift: true
-:portedToGlow: true
 
 [abstract]
 The `ejb-txn-remote-call` quickstart demonstrates remote transactional EJB calls over two application servers of {productName}.
@@ -277,41 +208,6 @@ The application this project produces is designed to be run on {productNameFull}
 All you need to build this project is {buildRequirements}. See link:{configureMavenDocUrl}[Configure Maven to Build and Deploy the Quickstarts] to make sure you are configured correctly for testing the quickstarts.
 
 :leveloffset!:
-// Use of {jbossHomeName}_1 and {jbossHomeName}_2
-:leveloffset: +1
-
-ifdef::requires-multiple-servers[]
-[[use_of_jboss_home_name]]
-= Use of the {jbossHomeName}_1, {jbossHomeName}_2, and QUICKSTART_HOME Variables
-
-This quickstart requires that you clone your `__{jbossHomeName}__` installation directory and run two servers. The installation path is described in detail here: link:{useProductHomeDocUrl}[Use of __{jbossHomeName}__ and __JBOSS_HOME__ Variables].
-
-In the following instructions, replace `__{jbossHomeName}_1__` with the path to your first {productName} server and replace `__{jbossHomeName}_2__` with the path to your second cloned {productName} server.
-
-When you see the replaceable variable __QUICKSTART_HOME__, replace it with the path to the root directory of all of the quickstarts.
-endif::[]
-
-ifdef::optional-domain-or-multiple-servers[]
-[[use_of_jboss_home_name]]
-= Use of the {jbossHomeName}_1, {jbossHomeName}_2, and QUICKSTART_HOME Variables
-
-When deploying this quickstart to a managed domain, replace `__{jbossHomeName}__` with the actual path to your {productName} installation. The installation path is described in detail here: link:{useProductHomeDocUrl}[Use of __{jbossHomeName}__ and __JBOSS_HOME__ Variables].
-
-When deploying this quickstart to multiple standalone servers, this quickstart requires that you clone your `__{jbossHomeName}__` installation directory and run two servers. In the following instructions, replace `__{jbossHomeName}_1__` with the path to your first {productName} server and replace `__{jbossHomeName}_2__` with the path to your second cloned {productName} server.
-
-When you see the replaceable variable __QUICKSTART_HOME__, replace it with the path to the root directory of all of the quickstarts.
-endif::[]
-
-ifndef::requires-multiple-servers,optional-domain-or-multiple-servers[]
-[[use_of_jboss_home_name]]
-= Use of the {jbossHomeName} and QUICKSTART_HOME Variables
-
-In the following instructions, replace `__{jbossHomeName}__` with the actual path to your {productName} installation. The installation path is described in detail here: link:{useProductHomeDocUrl}[Use of __{jbossHomeName}__ and __JBOSS_HOME__ Variables].
-
-When you see the replaceable variable __QUICKSTART_HOME__, replace it with the path to the root directory of all of the quickstarts.
-endif::[]
-
-:leveloffset!:
 
 == The Goal
 
@@ -320,8 +216,25 @@ to `server` application. The remote call hits one of the two servers where the `
 
 == Running in a bare metal environment
 
-First of all, three {productName} servers needs to be configured. Then, the `client` application gets deployed to the first server (`server1`),
-while the `server` application gets deployed to the other two {productName} servers (`server2`, and `server3`, which are configured as a cluster).
+First of all, an environment variable should be defined to point to this quickstart's root folder.
+From the root of this quickstart, the following command should be executed:
+
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
+----
+export PATH_TO_QUICKSTART_DIR=$(pwd)
+----
+
+Second, another environment variable should be defined to point to the {productName} installation directory:
+
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
+----
+export {jbossHomeName}=...
+----
+
+Then, three {productName} servers needs to be configured:
+
+. The `client` application gets deployed to the first server (`server1`)
+. The `server` application gets deployed to the other two {productName} servers (`server2`, and `server3`, which are configured as a cluster)
 
 [[_setup_productname_servers]]
 === Setup {productName} servers
@@ -336,17 +249,17 @@ The installation directories are named:
 * `__{jbossHomeName}_3__` for `server3`
 
 Given that the installation directory of the {productName} is identified with ${jbossHomeName}:
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cp -r ${jbossHomeName} server1; \
 {jbossHomeName}_1="$PWD/server1"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cp -r ${jbossHomeName} server2; \
 {jbossHomeName}_2="$PWD/server2"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cp -r ${jbossHomeName} server3; \
 {jbossHomeName}_3="$PWD/server3"
@@ -357,71 +270,27 @@ cp -r ${jbossHomeName} server3; \
 To successfully process EJB remote calls from `server1` to either `server2`
 or to `server3` a user to authenticate the EJB remote calls must be created on the receiving servers.
 
-Run the following procedure in the directories `__{jbossHomeName}_2__` and `__{jbossHomeName}_3__` to create the user for `server2` and `server3`.
-
-[#add_application_user]
-// Add the Authorized Application User
-:leveloffset: +3
-
-[[add_the_application_user]]
-= Add the Authorized Application User
-
-// Note: The group ID syntax must be defined in the calling topic.
-// using the document attribute :app-user-groups:
-// Use a comma-delimited list to define more than one group.
-//
-// :app-user-groups: guest, users
-
-ifdef::app-user-groups[]
-:app-group-list: {app-user-groups}
-:app-group-command: -g '{app-user-groups}'
-endif::app-user-groups[]
-
-ifndef::app-user-groups[]
-:app-group-list:
-:app-group-command:
-endif::app-user-groups[]
-
-// attr which other sections may check (ifdef) to know if users needs to be added
-:addQuickstartUser: true
-
-This quickstart uses secured application interfaces and requires that you create the following application user to access the running application.
-
-[cols="20%,20%,20%,40%",options="headers"]
-|===
-|UserName |Realm |Password |Roles
-
-|quickstartUser |ApplicationRealm |quickstartPwd1! |{app-group-list}
-|===
-
-To add the application user, open a terminal and type the following command:
+Type the following command to add the user to `server2`:
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-$ __{jbossHomeName}__/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!' {app-group-command}
+${jbossHomeName}_2/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!'
 ----
+
+And type the following command to add the user to `server3`:
+[source,subs="+quotes,attributes+",options="nowrap"]
+----
+${jbossHomeName}_3/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!'
+----
+
 NOTE: For Windows, use the `__{jbossHomeName}__\bin\add-user.bat` script.
 
-:leveloffset!:
-
-[NOTE]
-====
-For the `add-user.sh` (or `.bat`) command you, can add the parameter `-ds`.
-When you include this parameter, after the user is added, the system outputs a secret value that you can use to set up the remote output connection on `server1`.
-
-The output of command when `-ds` parameter is used:
-
-[code,sh]
-----
-To represent the user add the following to the server-identities definition <secret value="cXVpY2tzdGFydFB3ZDEh" />
-----
-====
-
+[[configure_datasources]]
 === Configure datasources
 
 As this quickstart performs transactional work against a database, it is needed to create a new database.
-For the purpose of this quickstart, a simple PostgreSQL container will be used:
+For the purpose of this quickstart, a simple PostgreSQL container will be used, please open another terminal and run the following command to download and start its image:
 
-[source,sh]
+[source,sh,options="nowrap"]
 ----
 podman run -p 5432:5432 --rm  -ePOSTGRES_DB=test -ePOSTGRES_USER=test -ePOSTGRES_PASSWORD=test postgres:9.4 -c max-prepared-transactions=110 -c log-statement=all
 ----
@@ -429,53 +298,53 @@ podman run -p 5432:5432 --rm  -ePOSTGRES_DB=test -ePOSTGRES_USER=test -ePOSTGRES
 The {productName} servers need to be configured to be able to connect to the database.
 First of all, a JDBC driver needs to be installed as https://docs.wildfly.org/30/Developer_Guide.html#Class_Loading_in_WildFly[jboss module].
 
-The following command (along packaging the `client` and the `server` applications) downloads the PostgreSQL driver automatically through Maven:
-[source,sh,subs="+quotes,attributes+"]
+The following command downloads the PostgreSQL driver automatically through Maven:
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call;
-mvn clean package
+cd ${PATH_TO_QUICKSTART_DIR};
+mvn clean process-sources
 ----
 Then, the PostgreSQL driver needs to be loaded as jboss module in all {productName} servers:
 
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_1; \
 ./bin/jboss-cli.sh "embed-server,\
   module add --name=org.postgresql.jdbc \
-  --resources=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/target/postgresql/postgresql.jar"
+  --resources=${PATH_TO_QUICKSTART_DIR}/client/target/postgresql/postgresql.jar"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_2; \
 ./bin/jboss-cli.sh "embed-server,\
   module add --name=org.postgresql.jdbc \
-  --resources=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/target/postgresql/postgresql.jar"
+  --resources=${PATH_TO_QUICKSTART_DIR}/client/target/postgresql/postgresql.jar"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_3; \
 ./bin/jboss-cli.sh "embed-server,\
   module add --name=org.postgresql.jdbc \
-  --resources=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/target/postgresql/postgresql.jar"
+  --resources=${PATH_TO_QUICKSTART_DIR}/client/target/postgresql/postgresql.jar"
 ----
 
 Moreover, the PostgreSQL driver needs to be installed on all {productName} servers.
 For `server1`, the configuration file `standalone.xml` will be used.
 For `server2` and `server3` the configuration file `standalone-ha.xml` will be used.
 
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_1; \
 ./bin/jboss-cli.sh "embed-server --server-config=standalone.xml,\
   /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql.jdbc,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_2; \
 ./bin/jboss-cli.sh "embed-server --server-config=standalone-ha.xml,\
   /subsystem=datasources/jdbc-driver=postgresql:add(driver-name=postgresql,driver-module-name=org.postgresql.jdbc,driver-xa-datasource-class-name=org.postgresql.xa.PGXADataSource)"
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_3; \
 ./bin/jboss-cli.sh "embed-server --server-config=standalone-ha.xml,\
@@ -484,32 +353,32 @@ cd ${jbossHomeName}_3; \
 
 Finally, it is time to run the scripts for adding the PostgreSQL datasource to the {productName} servers:
 
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_1; \
 ./bin/jboss-cli.sh -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
-  --file=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/scripts/postgresql-datasource.cli \
-  --properties=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/scripts/cli.local.properties
+  --file=${PATH_TO_QUICKSTART_DIR}/client/scripts/postgresql-datasource.cli \
+  --properties=${PATH_TO_QUICKSTART_DIR}/client/scripts/cli.local.properties
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_2; \
 ./bin/jboss-cli.sh -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
-  --file=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server/scripts/postgresql-datasource.cli \
-  --properties=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server/scripts/cli.local.properties
+  --file=${PATH_TO_QUICKSTART_DIR}/server/scripts/postgresql-datasource.cli \
+  --properties=${PATH_TO_QUICKSTART_DIR}/server/scripts/cli.local.properties
 ----
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_3; \
 ./bin/jboss-cli.sh -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
-  --file=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server/scripts/postgresql-datasource.cli \
-  --properties=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server/scripts/cli.local.properties
+  --file=${PATH_TO_QUICKSTART_DIR}/server/scripts/postgresql-datasource.cli \
+  --properties=${PATH_TO_QUICKSTART_DIR}/server/scripts/cli.local.properties
 ----
 
 === Configuring EJB remoting on `server1`
 
 EJB remote calls from `server1` to either `server2` or `server3` need to be authenticated. To achieve
-this configuration, the script `${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/scripts/remoting-configuration.cli`
+this configuration, the script `${PATH_TO_QUICKSTART_DIR}/client/scripts/remoting-configuration.cli`
 will be executed on `server1`.
 
 [NOTE]
@@ -518,12 +387,12 @@ will be executed on `server1`.
 ====
 
 [[remote_configuration_cli]]
-[source,sh,subs="+quotes,attributes+"]
+[source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_1; \
-./bin/jboss-cli.sh -DremoteServerUsername="quickstartUser" -DremoteServerPassword="quickstartPwd1!" \
-  --file=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/scripts/remoting-configuration.cli \
-  --properties=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/scripts/cli.local.properties
+./bin/jboss-cli.sh -DremoteServerUsername='quickstartUser' -DremoteServerPassword='quickstartPwd1!' \
+  --file=${PATH_TO_QUICKSTART_DIR}/client/scripts/remoting-configuration.cli \
+  --properties=${PATH_TO_QUICKSTART_DIR}/client/scripts/cli.local.properties
 ----
 
 NOTE: For Windows, use the `bin\jboss-cli.bat` script.
@@ -532,7 +401,7 @@ Running `remoting-configuration.cli` results in the creation of:
 
 * A `remote outbound socket` that points to the port on `server2`/`server3` where EJB remoting endpoints can be reached
 * A https://docs.wildfly.org/22/wildscribe/subsystem/remoting/remote-outbound-connection/index.html[`remote outbound connection`] that can be referenced in the war deployment with `jboss-ejb-client.xml` descriptor
-(see `${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/src/main/webapp/WEB-INF/jboss-ejb-client.xml`).
+(see `${PATH_TO_QUICKSTART_DIR}/client/src/main/webapp/WEB-INF/jboss-ejb-client.xml`).
 * An authentication context `auth_context` that is used by the new created remoting connection `remote-ejb-connection`; the authentication context uses the same username and password created for `server2` and `server3`
 
 [#_start_productname_servers]
@@ -550,7 +419,7 @@ Start each server in a separate terminal.
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
 cd ${jbossHomeName}_1; \
-./bin/standalone.sh -c standalone.xml -Djboss.tx.node.id=server1 -Djboss.node.name=server1 -Dwildfly.config.url=${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client/configuration/custom-config.xml
+./bin/standalone.sh -c standalone.xml -Djboss.tx.node.id=server1 -Djboss.node.name=server1
 ----
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
@@ -563,9 +432,6 @@ cd ${jbossHomeName}_3; \
 ./bin/standalone.sh -c standalone-ha.xml -Djboss.tx.node.id=server3 -Djboss.node.name=server3 -Djboss.socket.binding.port-offset=200
 ----
 
-NOTE: To enable the recovery of remote transaction failures, the configuration file `custom-config.xml`
-should be loaded into `server1`; this operation will authenticate `server1` against `server2`/`server3`.
-
 NOTE: For Windows, use the `bin\standalone.bat` script.
 
 === Deploying the Quickstart applications
@@ -573,11 +439,11 @@ NOTE: For Windows, use the `bin\standalone.bat` script.
 . With all {productName} servers <<_setup_productname_servers, configured>> and <<_start_productname_servers, running>>,
 the `client` and `server` application can be deployed
 
-. The whole project can be built using the following commands:
+. Ensure the whole project is built:
 +
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/
+cd ${PATH_TO_QUICKSTART_DIR}/
 mvn clean package
 ----
 +
@@ -585,7 +451,7 @@ mvn clean package
 +
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client
+cd ${PATH_TO_QUICKSTART_DIR}/client
 mvn wildfly:deploy
 ----
 +
@@ -593,13 +459,21 @@ mvn wildfly:deploy
 +
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server
+cd ${PATH_TO_QUICKSTART_DIR}/server
 mvn wildfly:deploy -Dwildfly.port=10090
 mvn wildfly:deploy -Dwildfly.port=10190
 ----
 
 The commands just run employed the WildFly Maven plugin to connect to the running instances of {productName}
 and deploy the `war` archives to the servers.
+
+The following warnings might appear in the server output after the applications are deployed. These warnings can be safely ignored in a development environment.
+
+[source,options="nowrap"]
+----
+WARN  [org.jgroups.protocols.UDP] (ServerService Thread Pool -- 90) JGRP000015: the receive buffer of socket ManagedMulticastSocketBinding was set to 20MB, but the OS only allocated 6.71MB
+WARN  [org.jgroups.protocols.UDP] (ServerService Thread Pool -- 90) JGRP000015: the receive buffer of socket ManagedMulticastSocketBinding was set to 25MB, but the OS only allocated 6.71MB
+----
 
 ==== Checkpoints
 
@@ -810,33 +684,41 @@ ARJUNA016036: commit on < formatId=131077, gtrid_length=35, bqual_length=43, tx_
 
 . The number of commits on the targeted server should be incremented by one.
 
+// Server Distribution Testing
 :leveloffset: +1
 
-[[undeploy_the_quickstart]]
-= Undeploy the Quickstart
+[[run_the_integration_tests_with_server_distribution]]
+= Run the Integration Tests
+ifndef::integrationTestsDirectory[:integrationTestsDirectory: src/test/]
+ifndef::extraStandardDistTestParams[:extraStandardDistTestParams: ]
 
-//*******************************************************************************
-// Include this template if your quickstart does a normal undeployment of an archive.
-//*******************************************************************************
-When you are finished testing the quickstart, follow these steps to undeploy the archive.
+This quickstart includes integration tests, which are located under the `{integrationTestsDirectory}` directory. The integration tests verify that the quickstart runs correctly when deployed on the server.
+
+Follow these steps to run the integration tests.
 
 . Make sure {productName} server is started.
-. Open a terminal and navigate to the root directory of this quickstart.
-. Type this command to undeploy the archive:
+. Make sure the quickstart is deployed.
+. Type the following command to run the `verify` goal with the `integration-testing` profile activated.
 +
-[source,options="nowrap"]
+[source,subs="attributes+",options="nowrap"]
 ----
-$ mvn wildfly:undeploy
+$ mvn verify -Pintegration-testing {extraStandardDistTestParams}
 ----
 
 :leveloffset!:
 
-Repeat the last step for `server2` and `server3`:
+[[undeploy_the_quickstart]]
+== Undeploy the Quickstart
+
+When you are finished testing the quickstart, execute these commands to undeploy the archives:
 
 [source,sh,options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
-mvn wildfly:undeploy -Dwildfly.port=10090;
+cd ${PATH_TO_QUICKSTART_DIR}/client
+mvn wildfly:undeploy
+
+cd ${PATH_TO_QUICKSTART_DIR}/server
+mvn wildfly:undeploy -Dwildfly.port=10090
 mvn wildfly:undeploy -Dwildfly.port=10190
 ----
 
@@ -855,39 +737,38 @@ WFLYSRV0018: Deployment "deployment.server.war" is using a private module ("org.
 ----
 
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 
 [[build_and_run_the_quickstart_with_provisioned_server]]
 == Building and running the quickstart application with provisioned {productName} server
 
-Instead of using a standard {productName} server distribution, the three {productName} servers to deploy and run the quickstart can be alternatively provisioned by activating the Maven profile named `provisioned-server` when building the quickstart:
+Instead of using a standard {productName} server distribution, the three {productName} servers to deploy and run the quickstart can be provisioned:
 
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client;
-mvn clean package -Pprovisioned-server \
-  -DremoteServerUsername="quickstartUser" -DremoteServerPassword="quickstartPwd1!" \
+cd ${PATH_TO_QUICKSTART_DIR}/client;
+mvn clean package \
+  -DremoteServerUsername="quickstartUser" -DremoteServerPassword='quickstartPwd1!' \
   -DpostgresqlUsername="test" -DpostgresqlPassword="test"
 ----
 [source,sh,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
-mvn clean package -Pprovisioned-server \
+cd ${PATH_TO_QUICKSTART_DIR}/server;
+mvn clean package \
   -Dwildfly.provisioning.dir=server2 -Djboss-as.home=target/server2 \
   -DpostgresqlUsername="test" -DpostgresqlPassword="test";
-mvn package -Pprovisioned-server \
+mvn package \
   -Dwildfly.provisioning.dir=server3 -Djboss-as.home=target/server3 \
   -DpostgresqlUsername="test" -DpostgresqlPassword="test"
 ----
 
-The provisioned {productName} servers, with the quickstart deployed, can then be found in the `target/server` directory, and their usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
+The provisioned {productName} servers, with the quickstart deployed, can then be found in `${PATH_TO_QUICKSTART_DIR}/client/target/server`, `${PATH_TO_QUICKSTART_DIR}/server/target/server2`, and `${PATH_TO_QUICKSTART_DIR}/server/target/server3` directories, and their usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
 
 The server provisioning functionality is provided by the WildFly Maven Plugin, and you may find its configuration in the pom.xml files of the quickstart.
 
-The quickstart user should be added before running the provisioned server:
+The quickstart user should be added after provisioning the servers, and before running them:
 [source,subs="+quotes,attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
+cd ${PATH_TO_QUICKSTART_DIR}/server;
 ./target/server2/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!';
 ./target/server3/bin/add-user.sh -a -u 'quickstartUser' -p 'quickstartPwd1!'
 ----
@@ -902,12 +783,7 @@ The integration tests included with this quickstart, which verify that the quick
 
 Follow these steps to run the integration tests.
 
-. As this quickstart performs transactional work against a database, it is needed to create a new database. For the purpose of this quickstart, a simple PostgreSQL container will be used:
-+
-[source,sh]
-----
-podman run -p 5432:5432 --rm  -ePOSTGRES_DB=test -ePOSTGRES_USER=test -ePOSTGRES_PASSWORD=test postgres:9.4 -c max-prepared-transactions=110 -c log-statement=all
-----
+. Ensure the PostgreSQL database is running, as described in <<configure_datasources>>.
 
 . Make sure the servers are provisioned by running the commands reported in <<build_and_run_the_quickstart_with_provisioned_server>>
 
@@ -917,26 +793,25 @@ podman run -p 5432:5432 --rm  -ePOSTGRES_DB=test -ePOSTGRES_USER=test -ePOSTGRES
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client;
-mvn wildfly:start -Djboss-as.home=target/server \
+cd ${PATH_TO_QUICKSTART_DIR}/client;
+mvn wildfly:start \
+  -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
   -Dwildfly.javaOpts="-Djboss.tx.node.id=server1 -Djboss.node.name=server1"
 ----
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
+cd ${PATH_TO_QUICKSTART_DIR}/server;
 mvn wildfly:start -Djboss-as.home=target/server2 \
-  -Dwildfly.port=10090 \
-  -Dwildfly.serverConfig=standalone-ha.xml \
+  -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
   -Dwildfly.javaOpts="-Djboss.socket.binding.port-offset=100 -Djboss.tx.node.id=server2 -Djboss.node.name=server2"
 ----
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
+cd ${PATH_TO_QUICKSTART_DIR}/server;
 mvn wildfly:start -Djboss-as.home=target/server3 \
-  -Dwildfly.port=10190 \
-  -Dwildfly.serverConfig=standalone-ha.xml \
+  -DpostgresqlUsername="test" -DpostgresqlPassword="test" \
   -Dwildfly.javaOpts="-Djboss.socket.binding.port-offset=200 -Djboss.tx.node.id=server3 -Djboss.node.name=server3"
 ----
 
@@ -944,20 +819,20 @@ mvn wildfly:start -Djboss-as.home=target/server3 \
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/client;
+cd ${PATH_TO_QUICKSTART_DIR}/client;
 mvn verify -Pintegration-testing
 ----
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
-mvn verify -Pintegration-testing -Dserver.host="http://localhost:8180/server"
+cd ${PATH_TO_QUICKSTART_DIR}/server;
+mvn verify -Pintegration-testing -Dserver.host="http://localhost:8180"
 ----
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call/server;
-mvn verify -Pintegration-testing -Dserver.host="http://localhost:8280/server"
+cd ${PATH_TO_QUICKSTART_DIR}/server;
+mvn verify -Pintegration-testing -Dserver.host="http://localhost:8280"
 ----
 
 . To shut down the {productName} provisioned servers using the {productName} Maven Plugin:
@@ -977,8 +852,6 @@ mvn wildfly:shutdown -Dwildfly.port=10090
 mvn wildfly:shutdown -Dwildfly.port=10190
 ----
 
-endif::[]
-
 == Running on OpenShift
 
 The ephemeral nature of OpenShift does not work smoothly with {productName}'s ability to handle transactions.
@@ -995,15 +868,13 @@ might result in no-ACID transactions.
 
 === Prerequisites
 
-Unresolved directive in README-source.adoc - include::../shared-doc/cd-create-project.adoc[leveloffset=+3]
-
 [#_install_operator]
 ==== Install {productName}'s Operator
 
+ifndef::ProductRelease[]
 To install {productName}'s Operator, follow the https://github.com/wildfly/wildfly-operator[official documentation]
 (which instructions are also reported here for convenience)
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
 [source,sh,options="nowrap",subs="+quotes,attributes+"]
 ----
 cd /tmp
@@ -1015,17 +886,63 @@ oc adm policy add-cluster-role-to-user cluster-admin developer
 make install
 make deploy
 ----
-endif::[]
 
 To verify that the {productName} Operator is running, execute the following command:
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
 [source,sh,options="nowrap",subs="+quotes,attributes+"]
 ----
 oc get po -n $(oc project -q)
 
 NAME                                READY   STATUS      RESTARTS   AGE
 wildfly-operator-5d4b7cc868-zfxcv   1/1     Running     1          22h
+----
+endif::[]
+
+ifdef::ProductRelease[]
+To install {productName}'s Operator, follow the https://docs.redhat.com/en/documentation/red_hat_jboss_enterprise_application_platform/8.0/html/using_jboss_eap_on_openshift_container_platform/assembly_deploying-your-jboss-eap-application-on-the-openshift-container-platform_default#proc_installing-eap-operator-using-the-cli_assembly_jboss-eap-operator-for-automating-application-deployment-on-openshift[official documentation] (which instructions are also reported here for convenience)
+
+[NOTE]
+====
+* You have access to an OpenShift Container Platform cluster using an account with cluster-admin permissions.
+* You have installed the oc tool in your local system.
+====
+
+. View the list of operators available to the cluster from the OperatorHub:
++
+[source,sh,options="nowrap",subs="+quotes,attributes+"]
+----
+oc get packagemanifests -n openshift-marketplace | grep eap
+----
+. Create a `Subscription` object YAML file (for example, `eap-operator-sub.yaml`) to subscribe a namespace to your EAP operator. The following is an example `Subscription` object YAML file:
++
+[source,sh,options="nowrap",subs="+quotes,attributes+"]
+----
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: eap
+  namespace: openshift-operators
+spec:
+  channel: stable
+  installPlanApproval: Automatic
+  name: eap
+  source:  redhat-operators
+  sourceNamespace: openshift-marketplace
+----
+. Create the `Subscription` object from the YAML file:
++
+[source,sh,options="nowrap",subs="+quotes,attributes+"]
+----
+oc apply -f eap-operator-sub.yaml
+----
++
+The EAP operator is successfully installed. At this point, the OLM is aware of the EAP operator.
+A ClusterServiceVersion (CSV) for the operator appears in the target namespace, and APIs provided by the EAP operator is available for creation.
+To verify that the {productName} Operator is running, execute the following command:
++
+[source,sh,options="nowrap",subs="+quotes,attributes+"]
+----
+oc get csv -n openshift-operators
 ----
 endif::[]
 
@@ -1050,15 +967,13 @@ To build the `client` and the `server` applications, this quickstart employs
 For more information about {productName}'s Helm chart, please refer to the official
 https://github.com/wildfly/wildfly-charts/blob/main/charts/wildfly/README.md[documentation].
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
 [source,sh,options="nowrap",subs="+quotes,attributes+"]
 ----
-helm repo add wildfly https://docs.wildfly.org/wildfly-charts/
+helm repo add {helmRepoName} {helmRepoUrl}
 
-helm install client -f charts/client.yaml wildfly/wildfly
-helm install server -f charts/server.yaml wildfly/wildfly
+helm install client -f charts/client.yaml {helmChartName}
+helm install server -f charts/server.yaml {helmChartName}
 ----
-endif::[]
 
 Wait for the builds to finish. Their status can be verified by executing the `oc get pod` command.
 
@@ -1076,7 +991,7 @@ on OpenShift, requires `view` permissions to read the labels of the pods:
 
 [source,sh,options="nowrap"]
 ----
-cd ${PATH_TO_QUICKSTART_DIR}/ejb-txn-remote-call;
+cd ${PATH_TO_QUICKSTART_DIR};
 oc create -f client/client-cr.yaml;
 oc create -f server/server-cr.yaml
 ----
@@ -1175,11 +1090,17 @@ helm uninstall postgresql
 
 Finally, to undeploy and uninstall the {productName}'s operator:
 
+ifndef::ProductRelease[]
 [source,sh,options="nowrap"]
 ----
 cd /tmp/wildfly-operator;
-make undeploy;
-make uninstall
+make undeploy
 ----
+endif::[]
 
-The above commands completely clean the OpenShift namespace
+ifdef::ProductRelease[]
+[source,sh,options="nowrap"]
+----
+oc delete -f eap-operator-sub.yaml
+----
+endif::[]

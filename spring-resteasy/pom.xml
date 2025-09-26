@@ -25,15 +25,15 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
 
     <artifactId>spring-resteasy</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Quickstart: spring-resteasy</name>
-    <description>This project demonstrates Spring with a JAX-RS RestEasy client</description>
+    <description>This project demonstrates Spring with a Jakarta REST RestEasy client</description>
 
     <licenses>
         <license>
@@ -44,18 +44,15 @@
     </licenses>
 
     <properties>
-        <!-- Spring 6 requires Java 17 -->
-        <maven.compiler.target>17</maven.compiler.target>
-        <maven.compiler.source>17</maven.compiler.source>
-
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
         <!-- the version for the Server -->
-        <version.server>34.0.0.Beta1</version.server>
+        <version.server>37.0.1.Final</version.server>
         <!-- the versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
-        <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
-
-        <!-- The versions for other Dependencies and Plugins -->
-        <version.spring.framework>6.0.4</version.spring.framework>
+        <version.plugin.wildfly>5.1.4.Final</version.plugin.wildfly>
+        <!-- the versions for other Dependencies and Plugins -->
+        <version.spring.framework>6.0.23</version.spring.framework>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +121,8 @@
     </dependencies>
 
     <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -138,6 +137,9 @@
     <profiles>
         <profile>
             <id>provisioned-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -151,11 +153,6 @@
                                     <archive>*</archive>
                                 </excludedArchives>
                             </discover-provisioning-info>
-                            <!--
-                                Rename the output war to ROOT.war before adding it to the server, so that the
-                                application is deployed in the root web context.
-                            -->
-                            <name>ROOT.war</name>
                         </configuration>
                         <executions>
                             <execution>
@@ -184,17 +181,23 @@
                                     <archive>*</archive>
                                 </excludedArchives>
                             </discover-provisioning-info>
-                            <!--
-                                The parent POM's 'openshift' profile renames the output archive to ROOT.war so that the
-                                application is deployed in the root web context. Add ROOT.war to the server.
-                            -->
-                            <filename>ROOT.war</filename>
                         </configuration>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>package</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- do not attach sources to openshift deployments -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>

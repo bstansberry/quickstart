@@ -36,7 +36,7 @@ import static org.junit.Assert.assertEquals;
  * @author Emmanuel Hugonnet (c) 2022 Red Hat, Inc.
  */
 public class BasicRuntimeIT {
-    private static final String DEFAULT_SERVER_HOST = "http://localhost:8080/ee-security";
+    private static final String DEFAULT_SERVER_HOST = "http://localhost:8080";
 
     protected URI getHTTPEndpoint() {
         String host = getServerHost();
@@ -44,7 +44,7 @@ public class BasicRuntimeIT {
             host = DEFAULT_SERVER_HOST;
         }
         try {
-            return new URI(host + "/secured");
+            return new URI(host + "/ee-security/secured");
         } catch (URISyntaxException ex) {
             throw new RuntimeException(ex);
         }
@@ -72,7 +72,7 @@ public class BasicRuntimeIT {
                 .build();
         response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
         assertEquals(200, response.statusCode());
-        String[] lines = response.body().toString().split(System.lineSeparator());
+        String[] lines = response.body().lines().toArray(String[]::new);
         assertEquals("SecuredServlet - doGet()", lines[0].trim());
         assertEquals("Identity as available from SecurityContext 'quickstartUser'", lines[1].trim());
         assertEquals("Identity as available from injection 'quickstartUser'", lines[2].trim());

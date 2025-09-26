@@ -32,7 +32,7 @@ import java.time.Duration;
  */
 public class BasicRuntimeIT {
 
-    private static final String DEFAULT_SERVER_HOST = "http://localhost:8080/hibernate";
+    private static final String DEFAULT_SERVER_HOST = "http://localhost:8080";
 
     @Test
     public void testHTTPEndpointIsAvailable() throws IOException, InterruptedException, URISyntaxException {
@@ -44,7 +44,7 @@ public class BasicRuntimeIT {
             serverHost = DEFAULT_SERVER_HOST;
         }
         final HttpRequest request = HttpRequest.newBuilder()
-                .uri(new URI(serverHost+"/"))
+                .uri(new URI(serverHost+"/hibernate"))
                 .GET()
                 .build();
         final HttpClient client = HttpClient.newBuilder()
@@ -53,7 +53,7 @@ public class BasicRuntimeIT {
                 .build();
         final HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         Assertions.assertEquals(200, response.statusCode());
-        final String[] bodyLines = response.body().toString().split(System.lineSeparator());
+        final String[] bodyLines = response.body().lines().toArray(String[]::new);
         Assertions.assertEquals("<meta http-equiv=\"Refresh\" content=\"0; URL=index.jsf\">", bodyLines[bodyLines.length-3]);
     }
 }

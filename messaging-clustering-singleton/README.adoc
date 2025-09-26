@@ -27,7 +27,6 @@ ifdef::ProductRelease[]
 :productVersion: 8.0
 :DocInfoProductNumber: {productVersion}
 :WildFlyQuickStartRepoTag: 8.0.x
-:productImageVersion: 8.0.0
 :helmChartName: jboss-eap/eap8
 endif::[]
 
@@ -35,11 +34,8 @@ ifdef::EAPXPRelease[]
 // JBoss EAP XP release
 :productName: JBoss EAP XP
 :productNameFull: Red Hat JBoss Enterprise Application Platform expansion pack
-:productVersion: 3.0
-:DocInfoProductNumber: 7.4
-:WildFlyQuickStartRepoTag: XP_3.0.0.GA
-:productImageVersion: 3.0
-:helmChartName: jboss-eap/eap-xp3
+:productVersion: 5.0
+:WildFlyQuickStartRepoTag: XP_5.0.0.GA
 endif::[]
 
 ifdef::ProductRelease,EAPXPRelease[]
@@ -62,14 +58,12 @@ ifndef::ProductRelease,EAPXPRelease[]
 :productNameFull: WildFly Application Server
 :ProductShortName: {productName}
 :jbossHomeName: WILDFLY_HOME
-:productVersion: 34
-:productImageVersion: 34.0
+:productVersion: 38
 :githubRepoUrl: https://github.com/wildfly/quickstart/
 :githubRepoCodeUrl: https://github.com/wildfly/quickstart.git
-:WildFlyQuickStartRepoTag: 34.0.0.Beta1
+:WildFlyQuickStartRepoTag: 37.0.0.Final
 :DocInfoProductName: Red Hat JBoss Enterprise Application Platform
 :DocInfoProductNameURL: red_hat_jboss_enterprise_application_platform
-:DocInfoProductNumber: 8.0
 :DocInfoPreviousProductName: jboss-enterprise-application-platform
 :helmRepoName: wildfly
 :helmRepoUrl: http://docs.wildfly.org/wildfly-charts/
@@ -80,33 +74,15 @@ endif::[]
 :source: {githubRepoUrl}
 
 // Values for Openshift S2i sections attributes
-:CDProductName:  {productNameFull} for OpenShift
-:CDProductShortName: {ProductShortName} for OpenShift
-:CDProductTitle: {CDProductName}
-:CDProductNameSentence: Openshift release for {ProductShortName}
-:CDProductAcronym: {CDProductShortName}
-:CDProductVersion: {productVersion}
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {EapForOpenshiftBookName} Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {xpaasproduct} Online
-:xpaasproduct-shortname: {CDProductShortName}
-:xpaasproductOpenShiftOnline-shortname: {xpaasproduct-shortname} Online
+:xpaasproduct-shortname: {ProductShortName} for OpenShift
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: Getting Started with {ProductShortName} for OpenShift Container Platform
 :EapForOpenshiftOnlineBookName: Getting Started with {ProductShortName} for OpenShift Online
 :OpenShiftOnlinePlatformName: Red Hat OpenShift Container Platform
 :OpenShiftOnlineName: Red Hat OpenShift Online
-:ImagePrefixVersion: eap80
-:ImageandTemplateImportBaseURL: https://raw.githubusercontent.com/jboss-container-images/jboss-eap-openshift-templates
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepo: https://github.com/jboss-developer/jboss-eap-quickstarts
-:EAPQuickStartRepoRef: 8.0.x
-:EAPQuickStartRepoTag: EAP_8.0.0.GA
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_online/
@@ -116,37 +92,22 @@ ifdef::EAPXPRelease[]
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {productNameFull} for OpenShift Online
-:xpaasproduct-shortname: {ProductShortName} for OpenShift
-:xpaasproductOpenShiftOnline-shortname: {ProductShortName} for OpenShift Online
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
-:ImagePrefixVersion: eap-xp3
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepoRef: xp-3.0.x
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 endif::[]
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
-:ImageandTemplateImportURL: https://raw.githubusercontent.com/wildfly/wildfly-s2i/v{productVersion}.0/
-endif::[]
-
 //*************************
 // Other values
 //*************************
-:buildRequirements: Java 11.0 (Java SDK 11) or later and Maven 3.6.0 or later
-:jbdsEapServerName: Red Hat JBoss Enterprise Application Platform 7.3
+:buildRequirements: Java SE 17.0 or later, and Maven 3.6.0 or later
 :javaVersion: Jakarta EE 10
 ifdef::EAPXPRelease[]
 :javaVersion: Eclipse MicroProfile
 endif::[]
-:githubRepoBranch: master
 :guidesBaseUrl: https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/
 :useEclipseUrl: {guidesBaseUrl}USE_JBDS.adoc#use_red_hat_jboss_developer_studio_or_eclipse_to_run_the_quickstarts
 :useEclipseDeployJavaClientDocUrl: {guidesBaseUrl}USE_JBDS.adoc#deploy_and_undeploy_a_quickstart_containing_server_and_java_client_projects
@@ -168,35 +129,6 @@ endif::[]
 :configureBytemanQuickstartDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
 :configureBytemanHaltDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#use_byteman_to_halt_the_application[
 :configureBytemanQuickstartsDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
-
-:EESubsystemNamespace: urn:jboss:domain:ee:4.0
-:IiopOpenJdkSubsystemNamespace: urn:jboss:domain:iiop-openjdk:2.0
-:MailSubsystemNamespace: urn:jboss:domain:mail:3.0
-:SingletonSubsystemNamespace: urn:jboss:domain:singleton:1.0
-:TransactionsSubsystemNamespace: urn:jboss:domain:transactions:4.0
-
-// LinkProductDocHome: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
-:LinkProductDocHome: https://access.redhat.com/documentation/en/jboss-enterprise-application-platform-continuous-delivery
-:LinkConfigGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/configuration_guide/
-:LinkDevelopmentGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/development_guide/
-:LinkGettingStartedGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_guide/
-:LinkOpenShiftWelcome: https://docs.openshift.com/online/welcome/index.html
-:LinkOpenShiftSignup: https://docs.openshift.com/online/getting_started/choose_a_plan.html
-:OpenShiftTemplateName: JBoss EAP CD (no https)
-
-:ConfigBookName: Configuration Guide
-:DevelopmentBookName: Development Guide
-:GettingStartedBookName: Getting Started Guide
-
-:JBDSProductName: Red Hat CodeReady Studio
-:JBDSVersion: 12.15
-:LinkJBDSInstall:  https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/installation_guide/
-:JBDSInstallBookName: Installation Guide
-:LinkJBDSGettingStarted: https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/getting_started_with_codeready_studio_tools/
-:JBDSGettingStartedBookName: Getting Started with CodeReady Studio Tools
-
-// Enable Rendering of Glow configuration in plugin examples
-:portedToGlow: true
 
 = messaging-clustering-singleton: Messaging Example that Demonstrates Clustering
 :author: Flavia Rainone, Jess Sightler
@@ -878,30 +810,6 @@ $ __{jbossHomeName}_2__/bin/jboss-cli.sh --connect controller=localhost:10090 --
 
 NOTE: For Windows, use the `__{jbossHomeName}_1__\bin\jboss-cli.bat` and `__{jbossHomeName}_2__\bin\jboss-cli.bat` scripts.
 
-
-// Server Distribution Testing
-:leveloffset: +2
-
-[[run_the_integration_tests_with_server_distribution]]
-= Run the Integration Tests
-ifndef::integrationTestsDirectory[:integrationTestsDirectory: src/test/]
-ifndef::extraStandardDistTestParams[:extraStandardDistTestParams: ]
-
-This quickstart includes integration tests, which are located under the `{integrationTestsDirectory}` directory. The integration tests verify that the quickstart runs correctly when deployed on the server.
-
-Follow these steps to run the integration tests.
-
-. Make sure {productName} server is started.
-. Make sure the quickstart is deployed.
-. Type the following command to run the `verify` goal with the `integration-testing` profile activated.
-+
-[source,subs="attributes+",options="nowrap"]
-----
-$ mvn verify -Pintegration-testing {extraStandardDistTestParams}
-----
-
-:leveloffset!:
-
 ==== Run the Integration Tests in a Managed Domain
 
 The integration tests may also be run with the domain server by typing the following command.
@@ -1041,20 +949,15 @@ The batch executed successfully
 . Delete the cloned directory.
 
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 
 [[build_and_run_the_quickstart_with_provisioned_server]]
 == Building and running the quickstart application with provisioned {productName} server
 
-Instead of using a standard {productName} server distribution, the two {productName} servers to deploy and run the quickstart can be alternatively provisioned by activating the Maven profile named `provisioned-server` when building the quickstart:
-[source,sh,subs="+quotes,attributes+",options="nowrap"]
-----
-$ mvn clean package -Pprovisioned-server
-----
+Instead of using a standard {productName} server distribution, the two {productName} servers to deploy and run the quickstart can be alternatively provisioned by the {productName} Maven Plugin.
 
-The provisioned {productName} servers, with the quickstart deployed, can then be found in the `target` directory, and their usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
+The provisioned {productName} servers, with the quickstart deployed, can be found in the `target/server` and `target/server2` directories, and their usage is similar to a standard server distribution, with the simplification that there is never the need to specify the server configuration to be started.
 
-The server provisioning functionality is provided by the WildFly Maven Plugin, and you may find its configuration in the pom.xml files of the quickstart.
+You can find the plugin configuration for the server provisioning in the Maven profile named `provisioned-server`.
 
 === Run the Integration Tests with a provisioned server
 
@@ -1073,9 +976,7 @@ $ mvn wildfly:start -Djboss-as.home=target/server
 +
 [source,subs="attributes+",options="nowrap"]
 ----
-$ mvn wildfly:start -Djboss-as.home=target/server2 \
-  -Dwildfly.port=10090 \
-  -Dwildfly.javaOpts="-Djboss.socket.binding.port-offset=100"
+$ mvn wildfly:start -Djboss-as.home=target/server2 -Dwildfly.javaOpts="-Djboss.socket.binding.port-offset=100"
 ----
 
 . Type the following command to run the `verify` goal with the `integration-testing` profile activated, and specifying the quickstart's URL using the `server.host` system property.
@@ -1101,8 +1002,6 @@ $ mvn wildfly:shutdown
 ----
 $ mvn wildfly:shutdown -Dwildfly.port=10090
 ----
-
-endif::[]
 
 // Quickstart not compatible with OpenShift
 :leveloffset: +1

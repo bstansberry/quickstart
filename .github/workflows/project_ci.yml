@@ -16,14 +16,14 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        jdk: [11, 17]
-        os: [ubuntu-20.04, windows-latest]
+        jdk: [17]
+        os: [ubuntu-latest, windows-latest]
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v5
       with:
         path: quickstarts
     - name: Set up JDK ${{ matrix.jdk }}
-      uses: actions/setup-java@v4
+      uses: actions/setup-java@v5
       with:
         java-version: ${{ matrix.jdk }}
         distribution: 'temurin'
@@ -31,7 +31,7 @@ jobs:
     - name: Build Quickstarts Release
       run: |
         cd quickstarts
-        mvn -U -B -fae clean install -Drelease
+        mvn -U -B -fae clean install -Drelease -P-provisioned-server,-bootable-jar
       shell: bash
     - uses: actions/upload-artifact@v4
       if: failure()
@@ -54,13 +54,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        jdk: [11, 17]
-        os: [ubuntu-20.04, windows-latest]
+        jdk: [17]
+        os: [ubuntu-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           path: quickstarts
-      - uses: actions/download-artifact@v4
+      - uses: actions/download-artifact@v5
         with:
           name: wildfly-maven-repository
           path: .
@@ -68,7 +68,7 @@ jobs:
         shell: bash
         run: tar -xzf wildfly-maven-repository.tar.gz -C ~
       - name: Set up JDK ${{ matrix.jdk }}
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: ${{ matrix.jdk }}
           distribution: 'temurin'
@@ -76,7 +76,7 @@ jobs:
       - name: Build Quickstarts Release with Server and BOMs Versions
         run: |
           cd quickstarts
-          mvn -U -B -fae clean install -Drelease -Dversion.server=${{ needs.wildfly-build.outputs.wildfly-version }}
+          mvn -U -B -fae clean install -Drelease -P-provisioned-server,-bootable-jar -Dversion.server=${{ needs.wildfly-build.outputs.wildfly-version }}
         shell: bash
       - uses: actions/upload-artifact@v4
         if: failure()

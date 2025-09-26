@@ -14,7 +14,7 @@ test_status=0
 script_directory="${0%/*}"
 script_directory=$(realpath "${script_directory}")
 cd "${script_directory}"
-qs_dir="${1}"
+qs_dir=$(echo "${1}" | sed 's/\///g')
 if [ -z "${1}" ]; then
   echo "No quickstart directory set"
   exit 1
@@ -90,9 +90,6 @@ export root_image_name="localhost:5000/${application}"
 export image="${root_image_name}:latest"
 docker tag ${qs_dir} ${image}
 docker push ${image}
-
-echo "Creating docker file locally and pushing to registry at localhost:5000"
-docker build -t "${image}" target
 
 ################################################################################################
 # Helm install, waiting for the pods to come up

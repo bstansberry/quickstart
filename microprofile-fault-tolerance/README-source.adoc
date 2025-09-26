@@ -5,7 +5,6 @@ include::../shared-doc/attributes.adoc[]
 :level: Intermediate
 :technologies: MicroProfile, Fault Tolerance
 :standalone-server-type: microprofile
-:portedToGlow: true
 :openshift: true
 
 [abstract]
@@ -49,7 +48,7 @@ include::../shared-doc/start-the-standalone-server.adoc[leveloffset=+1]
 [[project-from-scratch]]
 == Creating an Application from Scratch
 
-In this section we will go through the steps to create a new JAX-RS deployment from scratch and then make it more
+In this section we will go through the steps to create a new Jakarta REST deployment from scratch and then make it more
 resilient by using MicroProfile Fault Tolerance annotations.
 
 === Project Generation
@@ -82,12 +81,11 @@ Add the following properties to the `pom.xml`:
 <version.bom.ee>{versionServerBom}</version.bom.ee>
 ----
 
-Also the project can be updated to use Java 8 as the minimum:
+Also the project can be updated to use Java 17 as the minimum:
 
 [source,options="nowrap"]
 ----
-<maven.compiler.source>1.8</maven.compiler.source>
-<maven.compiler.target>1.8</maven.compiler.target>
+<maven.compiler.release>17</maven.compiler.release>
 ----
 
 Before the dependencies are defined add the following boms:
@@ -201,7 +199,7 @@ public class Coffee {
 }
 ----
 
-Now, lets expose our JAX-RS application at the context path:
+Now, lets expose our Jakarta REST application at the context path:
 
 [source,java]
 ----
@@ -617,7 +615,6 @@ See details in the section <<adding_resiliency_circuit_breakers, Adding Resilien
 
 // Server Distribution Testing
 include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+2]
-
 // Undeploy the Quickstart
 include::../shared-doc/undeploy-the-quickstart.adoc[leveloffset=+2]
 

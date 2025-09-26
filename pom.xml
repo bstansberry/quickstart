@@ -21,7 +21,7 @@
     <parent>
         <groupId>org.jboss</groupId>
         <artifactId>jboss-parent</artifactId>
-        <version>43</version>
+        <version>47</version>
     </parent>
 
     <groupId>org.wildfly.quickstarts</groupId>
@@ -30,7 +30,7 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
 
     <packaging>pom</packaging>
 
@@ -48,11 +48,9 @@
 
     <properties>
         <root.dir>${project.basedir}</root.dir>
-        <jboss.home.name>WILDFLY_HOME</jboss.home.name>
-        <product.name>WildFly</product.name>
         <!-- A base list of dependency and plug-in version used in the various quick starts. -->
         <version.org.asciidoctor.asciidoctor-maven-plugin>2.1.0</version.org.asciidoctor.asciidoctor-maven-plugin>
-        <version.org.wildfly.checkstyle-config>1.0.7.Final</version.org.wildfly.checkstyle-config>
+        <version.org.wildfly.checkstyle-config>1.0.8.Final</version.org.wildfly.checkstyle-config>
         <version.org.wildfly.quickstarts.documentation.plugin>2.4.1.Final</version.org.wildfly.quickstarts.documentation.plugin>
         <!-- other plug-in versions -->
         <version.com.mycyla.license>3.0</version.com.mycyla.license>
@@ -62,11 +60,11 @@
             filtered resources, i.e. build is platform dependent! -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <linkXRef>false</linkXRef>
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
     </properties>
 
     <build>
-        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>com.mycila</groupId>
@@ -255,6 +253,7 @@
                 <module>helloworld-mdb</module>
                 <module>helloworld-mutual-ssl</module>
                 <module>helloworld-mutual-ssl-secured</module>
+                <module>helloworld-rs</module>
                 <module>helloworld-singleton</module>
                 <module>helloworld-ws</module>
                 <module>hibernate</module>
@@ -284,6 +283,7 @@
                 <module>servlet-async</module>
                 <module>servlet-filterlistener</module>
                 <module>servlet-security</module>
+                <module>spring-resteasy</module>
                 <module>tasks-jsf</module>
                 <module>temperature-converter</module>
                 <module>todo-backend</module>
@@ -291,15 +291,6 @@
                 <module>thread-racing</module>
                 <module>websocket-endpoint</module>
                 <module>websocket-hello</module>
-            </modules>
-        </profile>
-        <profile>
-            <id>jdk-17-required</id>
-            <activation>
-                <jdk>[17,)</jdk>
-            </activation>
-            <modules>
-                <module>spring-resteasy</module>
             </modules>
         </profile>
         <profile>
@@ -446,7 +437,6 @@
             </modules>
         </profile>
     </profiles>
-
     <repositories>
         <repository>
             <id>jboss-public-maven-repository</id>

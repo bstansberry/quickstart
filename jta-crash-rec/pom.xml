@@ -25,11 +25,11 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
     <artifactId>jta-crash-rec</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Quickstart: jta-crash-rec</name>
     <description>This project demonstrates JTA crash recovery</description>
@@ -43,10 +43,13 @@
     </licenses>
 
     <properties>
-        <!-- The compatible WildFly version -->
-        <version.server>34.0.0.Beta1</version.server>
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- the version for the Server -->
+        <version.server>37.0.1.Final</version.server>
         <!-- The versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
+        <version.plugin.wildfly>5.1.4.Final</version.plugin.wildfly>
     </properties>
 
     <dependencyManagement>
@@ -122,6 +125,34 @@
         </dependency>
 
     </dependencies>
+
+    <build>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${version.plugin.wildfly}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <!-- specifies that the deployment depends on server module com.h2database.h2 -->
+                            <Dependencies>com.h2database.h2</Dependencies>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <profiles>
         <profile>

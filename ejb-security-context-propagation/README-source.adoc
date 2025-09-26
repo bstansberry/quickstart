@@ -4,7 +4,6 @@ include::../shared-doc/attributes.adoc[]
 :author: Stefan Guilhen
 :level: Advanced
 :technologies: EJB, Security
-:portedToGlow: true
 
 [abstract]
 The `ejb-security-context-propagation` quickstart demonstrates how the security context can be propagated to a remote EJB using a remote outbound connection configuration
@@ -199,7 +198,7 @@ Note that the `http-connector` in the `remoting` subsystem uses this `applicatio
 include::../shared-doc/build-and-deploy-the-quickstart.adoc[leveloffset=+1]
 
 // Server Distribution Testing
-include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+2]
+include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+1]
 
 == Investigate the Console Output
 
@@ -274,8 +273,6 @@ ERROR [org.jboss.as.ejb3.invocation] (default task-57) WFLYEJB0034: EJB Invocati
     at java.lang.Thread.run(Thread.java:745)
 ----
 
-// Server Distribution Testing
-include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+2]
 // Undeploy the Quickstart
 include::../shared-doc/undeploy-the-quickstart.adoc[leveloffset=+1]
 // Restore the {productName} Standalone Server Configuration
@@ -303,9 +300,7 @@ The batch executed successfully
 // Restore the {productName} Standalone Server Configuration Manually
 include::../shared-doc/restore-standalone-server-configuration-manual.adoc[leveloffset=+2]
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 include::../shared-doc/build-and-run-the-quickstart-with-provisioned-server.adoc[leveloffset=+1]
-endif::[]
 
 // Quickstart not compatible with OpenShift
 include::../shared-doc/openshift-incompatibility.adoc[leveloffset=+1]

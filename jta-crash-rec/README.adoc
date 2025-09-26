@@ -27,7 +27,6 @@ ifdef::ProductRelease[]
 :productVersion: 8.0
 :DocInfoProductNumber: {productVersion}
 :WildFlyQuickStartRepoTag: 8.0.x
-:productImageVersion: 8.0.0
 :helmChartName: jboss-eap/eap8
 endif::[]
 
@@ -35,11 +34,8 @@ ifdef::EAPXPRelease[]
 // JBoss EAP XP release
 :productName: JBoss EAP XP
 :productNameFull: Red Hat JBoss Enterprise Application Platform expansion pack
-:productVersion: 3.0
-:DocInfoProductNumber: 7.4
-:WildFlyQuickStartRepoTag: XP_3.0.0.GA
-:productImageVersion: 3.0
-:helmChartName: jboss-eap/eap-xp3
+:productVersion: 5.0
+:WildFlyQuickStartRepoTag: XP_5.0.0.GA
 endif::[]
 
 ifdef::ProductRelease,EAPXPRelease[]
@@ -62,14 +58,12 @@ ifndef::ProductRelease,EAPXPRelease[]
 :productNameFull: WildFly Application Server
 :ProductShortName: {productName}
 :jbossHomeName: WILDFLY_HOME
-:productVersion: 34
-:productImageVersion: 34.0
+:productVersion: 38
 :githubRepoUrl: https://github.com/wildfly/quickstart/
 :githubRepoCodeUrl: https://github.com/wildfly/quickstart.git
-:WildFlyQuickStartRepoTag: 34.0.0.Beta1
+:WildFlyQuickStartRepoTag: 37.0.0.Final
 :DocInfoProductName: Red Hat JBoss Enterprise Application Platform
 :DocInfoProductNameURL: red_hat_jboss_enterprise_application_platform
-:DocInfoProductNumber: 8.0
 :DocInfoPreviousProductName: jboss-enterprise-application-platform
 :helmRepoName: wildfly
 :helmRepoUrl: http://docs.wildfly.org/wildfly-charts/
@@ -80,33 +74,15 @@ endif::[]
 :source: {githubRepoUrl}
 
 // Values for Openshift S2i sections attributes
-:CDProductName:  {productNameFull} for OpenShift
-:CDProductShortName: {ProductShortName} for OpenShift
-:CDProductTitle: {CDProductName}
-:CDProductNameSentence: Openshift release for {ProductShortName}
-:CDProductAcronym: {CDProductShortName}
-:CDProductVersion: {productVersion}
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {EapForOpenshiftBookName} Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {xpaasproduct} Online
-:xpaasproduct-shortname: {CDProductShortName}
-:xpaasproductOpenShiftOnline-shortname: {xpaasproduct-shortname} Online
+:xpaasproduct-shortname: {ProductShortName} for OpenShift
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: Getting Started with {ProductShortName} for OpenShift Container Platform
 :EapForOpenshiftOnlineBookName: Getting Started with {ProductShortName} for OpenShift Online
 :OpenShiftOnlinePlatformName: Red Hat OpenShift Container Platform
 :OpenShiftOnlineName: Red Hat OpenShift Online
-:ImagePrefixVersion: eap80
-:ImageandTemplateImportBaseURL: https://raw.githubusercontent.com/jboss-container-images/jboss-eap-openshift-templates
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepo: https://github.com/jboss-developer/jboss-eap-quickstarts
-:EAPQuickStartRepoRef: 8.0.x
-:EAPQuickStartRepoTag: EAP_8.0.0.GA
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_container_platform/
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_with_jboss_eap_for_openshift_online/
@@ -116,37 +92,22 @@ ifdef::EAPXPRelease[]
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
 :xpaasproduct: {productNameFull} for OpenShift
-:xpaasproductOpenShiftOnline: {productNameFull} for OpenShift Online
-:xpaasproduct-shortname: {ProductShortName} for OpenShift
-:xpaasproductOpenShiftOnline-shortname: {ProductShortName} for OpenShift Online
 :ContainerRegistryName: Red Hat Container Registry
 :EapForOpenshiftBookName: {productNameFull} for OpenShift
 :EapForOpenshiftOnlineBookName: {productNameFull} for OpenShift Online
-:ImagePrefixVersion: eap-xp3
-:ImageandTemplateImportURL: {ImageandTemplateImportBaseURL}/{ImagePrefixVersion}/
-:BuildImageStream: jboss-{ImagePrefixVersion}-openjdk11-openshift
-:RuntimeImageStream: jboss-{ImagePrefixVersion}-openjdk11-runtime-openshift
-// OpenShift repository and reference for quickstarts
-:EAPQuickStartRepoRef: xp-3.0.x
 // Links to the OpenShift documentation
 :LinkOpenShiftGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 :LinkOpenShiftOnlineGuide: https://access.redhat.com/documentation/en-us/red_hat_jboss_enterprise_application_platform/{DocInfoProductNumber}/html/using_eclipse_microprofile_in_jboss_eap/using-the-openshift-image-for-jboss-eap-xp_default
 endif::[]
 
-ifndef::ProductRelease,EAPCDRelease,EAPXPRelease[]
-:ImageandTemplateImportURL: https://raw.githubusercontent.com/wildfly/wildfly-s2i/v{productVersion}.0/
-endif::[]
-
 //*************************
 // Other values
 //*************************
-:buildRequirements: Java 11.0 (Java SDK 11) or later and Maven 3.6.0 or later
-:jbdsEapServerName: Red Hat JBoss Enterprise Application Platform 7.3
+:buildRequirements: Java SE 17.0 or later, and Maven 3.6.0 or later
 :javaVersion: Jakarta EE 10
 ifdef::EAPXPRelease[]
 :javaVersion: Eclipse MicroProfile
 endif::[]
-:githubRepoBranch: master
 :guidesBaseUrl: https://github.com/jboss-developer/jboss-developer-shared-resources/blob/master/guides/
 :useEclipseUrl: {guidesBaseUrl}USE_JBDS.adoc#use_red_hat_jboss_developer_studio_or_eclipse_to_run_the_quickstarts
 :useEclipseDeployJavaClientDocUrl: {guidesBaseUrl}USE_JBDS.adoc#deploy_and_undeploy_a_quickstart_containing_server_and_java_client_projects
@@ -169,35 +130,6 @@ endif::[]
 :configureBytemanHaltDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#use_byteman_to_halt_the_application[
 :configureBytemanQuickstartsDocUrl: {guidesBaseUrl}CONFIGURE_BYTEMAN.adoc#configure_byteman_for_use_with_the_quickstarts
 
-:EESubsystemNamespace: urn:jboss:domain:ee:4.0
-:IiopOpenJdkSubsystemNamespace: urn:jboss:domain:iiop-openjdk:2.0
-:MailSubsystemNamespace: urn:jboss:domain:mail:3.0
-:SingletonSubsystemNamespace: urn:jboss:domain:singleton:1.0
-:TransactionsSubsystemNamespace: urn:jboss:domain:transactions:4.0
-
-// LinkProductDocHome: https://access.redhat.com/documentation/en/red-hat-jboss-enterprise-application-platform/
-:LinkProductDocHome: https://access.redhat.com/documentation/en/jboss-enterprise-application-platform-continuous-delivery
-:LinkConfigGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/configuration_guide/
-:LinkDevelopmentGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/development_guide/
-:LinkGettingStartedGuide: https://access.redhat.com/documentation/en-us/{DocInfoProductNameURL}/{DocInfoProductNumber}/html-single/getting_started_guide/
-:LinkOpenShiftWelcome: https://docs.openshift.com/online/welcome/index.html
-:LinkOpenShiftSignup: https://docs.openshift.com/online/getting_started/choose_a_plan.html
-:OpenShiftTemplateName: JBoss EAP CD (no https)
-
-:ConfigBookName: Configuration Guide
-:DevelopmentBookName: Development Guide
-:GettingStartedBookName: Getting Started Guide
-
-:JBDSProductName: Red Hat CodeReady Studio
-:JBDSVersion: 12.15
-:LinkJBDSInstall:  https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/installation_guide/
-:JBDSInstallBookName: Installation Guide
-:LinkJBDSGettingStarted: https://access.redhat.com/documentation/en-us/red_hat_codeready_studio/{JBDSVersion}/html-single/getting_started_with_codeready_studio_tools/
-:JBDSGettingStartedBookName: Getting Started with CodeReady Studio Tools
-
-// Enable Rendering of Glow configuration in plugin examples
-:portedToGlow: true
-
 = jta-crash-rec: Example of JTA Crash Recovery
 :author: Mike Musgrove
 :level: Advanced
@@ -209,7 +141,6 @@ The `jta-crash-rec` quickstart uses JTA and Byteman to show how to code distribu
 :standalone-server-type: full
 :archiveType: war
 :uses-h2:
-:uses-ds-xml:
 
 == What is it?
 
@@ -226,7 +157,7 @@ The relational database table in this example contains two columns that represen
 
 In this example, you halt the {productName} server in the middle of an XA transaction after the database modification has been committed, but before the JMS producer is committed. You can verify that the transaction was started, then restart the {productName} server to complete the transaction. You then verify that everything is in a consistent state.
 
-{productName} ships with H2, an in-memory database written in Java. In this example, we use H2 for the database. Although H2 XA support is not recommended for production systems, the example does illustrate the general steps you need to perform for any datasource vendor. This example provides its own H2 XA datasource configuration. It is defined in the `jta-crash-rec-ds.xml` file in the WEB-INF folder of the WAR archive.
+{productName} ships with H2, an in-memory database written in Java. In this example, we use H2 for the database. Although H2 XA support is not recommended for production systems, the example does illustrate the general steps you need to perform for any datasource vendor. This example provides its own H2 XA datasource configuration. It is defined by a 'DataSourceDefinition' annotation in the `XAServlet.java` file.
 
 // Link to the quickstart source
 :leveloffset: +1
@@ -664,20 +595,32 @@ WARN  [com.arjuna.ats.jta] (Periodic Recovery) ARJUNA016037: Could not find new 
 WARN  [com.arjuna.ats.jta] (Periodic Recovery) ARJUNA016038: No XAResource to recover < formatId=131077, gtrid_length=29, bqual_length=36, tx_uid=0:ffff7f000001:1040a11d:534ede43:1c, node_name=1, branch_uid=0:ffff7f000001:1040a11d:534ede43:20, subordinatenodename=null, eis_name=java:jboss/datasources/JTACrashRecQuickstartDS >
 ----
 +
-This is normal. What actually happened is that the first resource, `JTACrashRecQuickstartDS`, committed before the {productName} server was halted to insert the recovery record. The transaction logs are only updated/deleted after the outcome of the transaction is determined. If the transaction manager did update the log as each participant (database and JMS queue) completed then throughput would suffer. Notice you do not get a similar message for the JMS resource since that is the resource that recovered and the log record was updated to reflect this change. You need to manually remove the record for the first participant if you know which one is which or, if you are using the community version of the ${product.name} server, then you can also inspect the transaction logs using a JMX browser. For the demo it is simplest to delete the records from the file system, however, *be wary of doing this on a production system*.
+This is normal. What actually happened is that the first resource, `JTACrashRecQuickstartDS`, committed before the {productName} server was halted to insert the recovery record. The transaction logs are only updated/deleted after the outcome of the transaction is determined. If the transaction manager did update the log as each participant (database and JMS queue) completed then throughput would suffer. Notice you do not get a similar message for the JMS resource since that is the resource that recovered and the log record was updated to reflect this change. You need to manually remove the record for the first participant if you know which one is which or, if you are using the community version of the ${productName} server, then you can also inspect the transaction logs using a JMX browser. For the demo it is simplest to delete the records from the file system, however, *be wary of doing this on a production system*.
 
 . Do NOT forget to link:{configureBytemanDisableDocUrl}[Disable the Byteman script] by restoring the backup server configuration file. The Byteman rule must be removed to ensure that your application server will be able to commit 2PC transactions!
 
-== Server Log: Expected Warnings and Errors
+// Server Distribution Testing
+:leveloffset: +1
 
-You will see the following warnings in the server log. You can ignore these warnings.
+[[run_the_integration_tests_with_server_distribution]]
+= Run the Integration Tests
+ifndef::integrationTestsDirectory[:integrationTestsDirectory: src/test/]
+ifndef::extraStandardDistTestParams[:extraStandardDistTestParams: ]
 
-[source,options="nowrap"]
+This quickstart includes integration tests, which are located under the `{integrationTestsDirectory}` directory. The integration tests verify that the quickstart runs correctly when deployed on the server.
+
+Follow these steps to run the integration tests.
+
+. Make sure {productName} server is started.
+. Make sure the quickstart is deployed.
+. Type the following command to run the `verify` goal with the `integration-testing` profile activated.
++
+[source,subs="attributes+",options="nowrap"]
 ----
-WFLYJCA0091: -ds.xml file deployments are deprecated. Support may be removed in a future version.
-HHH000431: Unable to determine H2 database version, certain features may not work
+$ mvn verify -Pintegration-testing {extraStandardDistTestParams}
 ----
 
+:leveloffset!:
 // Undeploy the Quickstart
 :leveloffset: +1
 
@@ -699,67 +642,13 @@ $ mvn wildfly:undeploy
 ----
 
 :leveloffset!:
-// Run the Quickstart in Red Hat CodeReady Studio or Eclipse
-:leveloffset: +1
-
-[[run_the_quickstart_in_redhat_codeready_studio_or_eclipse]]
-= Run the Quickstart in {JBDSProductName} or Eclipse
-//******************************************************************************
-// Include this template to provide instructions to run the quickstart
-// in Red Hat CodeReady Studio.
-//
-// If the quickstart is not supported, create the `jbds-not-supported` attribute.
-//******************************************************************************
-ifdef::jbds-not-supported[]
-This quickstart is not supported in {JBDSProductName}.
-endif::jbds-not-supported[]
-
-ifndef::jbds-not-supported[]
-You can also start the server and deploy the quickstarts, or run any tests in {JBDSProductName} or from Eclipse using JBoss tools. For general information about how to import a quickstart, add a {productName} server, and build and deploy a quickstart, see link:{useEclipseUrl}[Use {JBDSProductName} or Eclipse to Run the Quickstarts].
-endif::jbds-not-supported[]
-
-// Add additional instructions specific to running this quickstart in an IDE here.
-
-:leveloffset!:
-
-
-NOTE: Within {JBDSProductName}, make sure you define a server runtime environment that uses the `standalone-full.xml` configuration file.
-
-// Debug the Application
-:leveloffset: +1
-
-[[debug_the_application]]
-= Debug the Application
-//******************************************************************************
-// Include this template to provide debugging information.
-//******************************************************************************
-
-If you want to debug the source code of any library in the project, run the following command to pull the source into your local repository. The IDE should then detect it.
-
-----
-$ mvn dependency:sources
-----
-
-////
-TODO: I need to investigate whether the following version can be used across all quickstarts.
-
-If you want to debug the source code or look at the Javadocs of any library in the project, run either of the following commands to pull them into your local repository. The IDE should then detect them.
-
-[source,options="nowrap"]
-----
-$ mvn dependency:sources
-$ mvn dependency:resolve -Dclassifier=javadoc
-----
-////
-
-:leveloffset!:
-
-//*************************************************
-// Product Release content only
-//*************************************************
-ifdef::ProductRelease[]
 
 // Quickstart not compatible with OpenShift
-include::../shared-doc/openshift-incompatibility.adoc[leveloffset=+1]
+:leveloffset: +1
 
-endif::[]
+[[openshift_incompatibility]]
+= {xpaasproduct-shortname} Incompatibility
+
+This quickstart is not compatible with {xpaasproduct-shortname}.
+
+:leveloffset!:

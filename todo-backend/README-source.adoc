@@ -7,17 +7,16 @@ include::../shared-doc/attributes.adoc[]
 :idseparator:       -
 :keywords:          openshift,galleon,helm
 :level:             Intermediate
-:technologies:      JPA, JAX-RS, OpenShift, Galleon
+:technologies:      JPA, Jakarta REST, OpenShift, Galleon
 :openshift: true
 :archiveType: war
 :useHelmChartDir: true
 :helm-install-prerequisites-openshift: ../todo-backend/helm-install-prerequisites.adoc
 :helm-install-prerequisites-kubernetes: ../todo-backend/helm-install-prerequisites.adoc
-:portedToGlow: true
 :helmSetWildFlyArgumentPrefix: wildfly.
 
 [abstract]
-The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with JAX-RS
+The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with Jakarta REST
 to manage a list of ToDo which are persisted in a database with JPA.
 
 ifndef::ProductRelease[]
@@ -32,7 +31,7 @@ endif::[]
 
 == What is it?
 
-The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with `JAX-RS`
+The `todo-backend` quickstart demonstrates how to implement a backend that exposes a HTTP API with `Jakarta REST`
 to manage a list of ToDo which are persisted in a database with `JPA`.
 
 * The backend exposes a HTTP API to manage a list of todos that complies with the specs defined at https://todobackend.com/specs/index.html[todobackend.com].
@@ -86,7 +85,7 @@ The layers are defined in the `pom.xml` file in the `<configuration>` section of
 endif::[]
 
 The `cloud-server` layer provides everything needed to run the backend on OpenShift. This also includes access to
-Jakarta EE APIs such as CDI, JAX-RS, JPA, etc. These two layers comes from the {productName} feature pack provided in the
+Jakarta EE APIs such as CDI, Jakarta REST, JPA, etc. These two layers comes from the {productName} feature pack provided in the
 {productName} S2I builder image.
 
 ifndef::ProductRelease[]
@@ -157,8 +156,6 @@ This script is executed at build time and will provide the following HTTP header
 By default, the backend accepts requests from any origin (`*`). This is only simplicity. It is possible to restrict
 the allowed origin using the environment variable `CORS_ORIGIN` at runtime.
 
-ifndef::ProductRelease[]
-
 == Run the Backend Locally
 
 === Package the Backend
@@ -167,7 +164,7 @@ The backend is packaged and deployed on a provisioned server:
 
 [source,options="nowrap"]
 ----
-$ mvn clean package -Pprovisioned-server
+$ mvn clean package
 ----
 
 === Run a Local PostgreSQL Database
@@ -196,20 +193,24 @@ The backend is running, and we can use the HTTP API to manage a list of todos:
 [source,options="nowrap"]
 ----
 # get a list of todos
-$ curl http://localhost:8080
+$ curl http://localhost:8080/todo-backend
 []
 
 # create a todo with the title "This is my first todo item!"
-$ curl -X POST -H "Content-Type: application/json"  -d '{"title": "This is my first todo item!"}' http://localhost:8080
+$ curl -X POST -H "Content-Type: application/json"  -d '{"title": "This is my first todo item!"}' http://localhost:8080/todo-backend
 {"completed":false,"id":1,"order":0,"title":"This is my first todo item!","url":"https://localhost:8080/1"}%
 
 # get a list of todos with the one that was just created
-$ curl http://localhost:8080
+$ curl http://localhost:8080/todo-backend
 [{"completed":false,"id":1,"order":0,"title":"This is my first todo item!","url":"https://localhost:8080/1"}]
 ----
 
-:extraStartParams: -DPOSTGRESQL_DATABASE=todos -DPOSTGRESQL_SERVICE_HOST=localhost -DPOSTGRESQL_SERVICE_PORT=5432 -DPOSTGRESQL_USER=todos -DPOSTGRESQL_PASSWORD=mysecretpassword -DPOSTGRESQL_DATASOURCE=ToDos
-include::../shared-doc/run-integration-tests-with-provisioned-server.adoc[leveloffset=+1]
+Please note that the quickstart includes integration tests, which may be executed using the following command:
+
+[source,subs="attributes+",options="nowrap"]
+----
+$ mvn verify -Pintegration-testing
+----
 
 //===========================================================
 // Openshift - START
@@ -239,7 +240,5 @@ endif::[]
 This quickstart shows how the datasource feature pack provided by {productName} simplifies the deployment
 of a {productName} Jakarta EE backend on OpenShift to connect to an external database and exposes an HTTP API.
 
-ifndef::ProductRelease[]
 The use of a Server Provisioned deployment makes it seamless to move from a local deployment for development to a
 deployment on cloud platforms such as OpenShift and Kubernetes.
-endif::[]

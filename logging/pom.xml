@@ -25,11 +25,11 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
-    <artifactId>jboss-logging</artifactId>
-    <version>34.0.0.Beta1</version>
+    <artifactId>logging</artifactId>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Quickstart: logging</name>
     <description>This project demonstrates logging in JBoss EAP</description>
@@ -43,20 +43,17 @@
     </licenses>
 
     <properties>
-        <!-- The server version -->
-        <version.server>34.0.0.Beta1</version.server>
-        <!-- The versions for BOMs, Dependencies and Plugins -->
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
+        <!-- The version for the Server -->
+        <version.server>37.0.1.Final</version.server>
+        <!-- the versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
-        <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
-
-        <version.org.junit>5.10.1</version.org.junit>
-
-        <!-- Configuration settings -->
+        <version.plugin.wildfly>5.1.4.Final</version.plugin.wildfly>
+        <!-- the versions for other Dependencies and Plugins -->
+        <version.org.junit>5.10.5</version.org.junit>
+        <!-- Project configuration settings -->
         <jboss.home>${project.build.directory}/server</jboss.home>
-
-        <!-- These settings can be removed when the parent is upgraded to 6 -->
-        <maven.compiler.target>11</maven.compiler.target>
-        <maven.compiler.source>11</maven.compiler.source>
     </properties>
 
     <dependencyManagement>
@@ -145,37 +142,38 @@
     </dependencies>
 
     <build>
-        <plugins>
-            <plugin>
-                <groupId>org.wildfly.plugins</groupId>
-                <artifactId>wildfly-maven-plugin</artifactId>
-                <version>${version.plugin.wildfly}</version>
-                <configuration>
-                    <jboss-home>${jboss.home}</jboss-home>
-                    <fail-on-error>false</fail-on-error>
-                    <scripts>
-                        <script>${project.basedir}${file.separator}configure-logging.cli</script>
-                    </scripts>
-                </configuration>
-            </plugin>
-        </plugins>
+        <!-- Set the name of the WAR, used as the context root when the app is deployed. -->
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>${version.plugin.wildfly}</version>
+                    <configuration>
+                        <jboss-home>${jboss.home}</jboss-home>
+                        <fail-on-error>false</fail-on-error>
+                        <scripts>
+                            <script>${project.basedir}${file.separator}configure-logging.cli</script>
+                        </scripts>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <profiles>
         <profile>
             <id>provisioned-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>${version.plugin.wildfly}</version>
                         <configuration>
-                            <!--
-                                Rename the output war to ROOT.war before adding it to the server, so that the
-                                application is deployed in the root web context.
-                            -->
-                            <name>ROOT.war</name>
                             <discover-provisioning-info>
                                 <version>${version.server}</version>
                             </discover-provisioning-info>
@@ -192,8 +190,6 @@
                                     <resolve-expressions>true</resolve-expressions>
                                 </packaging-script>
                             </packaging-scripts>
-                            <!-- deploys the quickstart on root web context -->
-                            <name>ROOT.war</name>
                         </configuration>
                         <executions>
                             <execution>
@@ -213,13 +209,7 @@
                     <plugin>
                         <groupId>org.wildfly.plugins</groupId>
                         <artifactId>wildfly-maven-plugin</artifactId>
-                        <version>${version.plugin.wildfly}</version>
                         <configuration>
-                            <!--
-                                The parent POM's 'openshift' profile renames the output archive to ROOT.war so that the
-                                application is deployed in the root web context. Add ROOT.war to the server.
-                            -->
-                            <filename>ROOT.war</filename>
                             <discover-provisioning-info>
                                 <version>${version.server}</version>
                                 <context>cloud</context>
@@ -236,13 +226,23 @@
                                     <resolve-expressions>true</resolve-expressions>
                                 </packaging-script>
                             </packaging-scripts>
-                            <filename>ROOT.war</filename>
                         </configuration>
                         <executions>
                             <execution>
                                 <goals>
                                     <goal>package</goal>
                                 </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!-- do not attach sources to openshift deployments -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <phase>none</phase>
                             </execution>
                         </executions>
                     </plugin>

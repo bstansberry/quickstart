@@ -25,12 +25,11 @@
         Maintain separation between the artifact id and the version to help prevent
         merge conflicts between commits changing the GA and those changing the V.
         -->
-        <version>8</version>
+        <version>10</version>
         <relativePath/>
     </parent>
-<!-- Temp: Trigger CI -->
     <artifactId>ejb-txn-remote-call</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>Quickstart: ejb-txn-remote-call</name>
     <description>The project demonstrates how to make EJB remote calls from server to server with transaction propagation.
@@ -50,6 +49,11 @@
         <!-- application for the second server, the server which is callee and receives the remote call -->
         <module>server</module>
     </modules>
+
+    <properties>
+        <!-- the Maven project should use the minimum Java SE version supported -->
+        <maven.compiler.release>17</maven.compiler.release>
+    </properties>
 
     <repositories>
         <repository>

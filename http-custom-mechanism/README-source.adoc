@@ -4,7 +4,6 @@ include::../shared-doc/attributes.adoc[]
 :author: Darran Lofthouse
 :level: Intermediate
 :technologies: EJB, Security
-:portedToGlow: true
 
 [abstract]
 The `http-custom-mechanism` quickstart demonstrates how to implement a custom HTTP authentication mechanism that can be registered with Elytron.
@@ -106,7 +105,7 @@ $ __{jbossHomeName}__/bin/jboss-cli.sh --connect --file=add-custom-module.cli
 
 NOTE: For Windows, use the `__{jbossHomeName}__\bin\jboss-cli.bat` script.
 
-This creates the custom `__{jbossHomeName}__/modules/modules/org/jboss/as/quickstart/http_custom_mechanism/main` folder, then copies in the `custom-module/target/custom-module.jar` file and creates the required `module.xml` file.
+This creates the custom `__{jbossHomeName}__/modules/org/jboss/as/quickstart/http_custom_mechanism/main` folder, then copies in the `custom-module/target/custom-module.jar` file and creates the required `module.xml` file.
 
 You can verify the module structure in your file manager.
 
@@ -218,11 +217,13 @@ You should see the HTTP result `HTTP/1.1 200 OK`, along with some header informa
 </html>
 ----
 
+// Server Distribution Testing
+include::../shared-doc/run-integration-tests-with-server-distribution.adoc[leveloffset=+2]
 // Undeploy the Quickstart
 include::../shared-doc/undeploy-the-quickstart.adoc[leveloffset=+2]
 // Restore the {productName} Standalone Server Configuration Manually
 :restoreScriptName: restore-configuration.cli
-include::../shared-doc/restore-standalone-server-configuration-manual.adoc[leveloffset=+2]
+include::../shared-doc/restore-standalone-server-configuration.adoc[leveloffset=+2]
 
 // Additional information about this script
 This script reverts the changes made to the `undertow`  and `elytron` subsystems. You should see the following result when you run the script.
@@ -232,14 +233,21 @@ This script reverts the changes made to the `undertow`  and `elytron` subsystems
 The batch executed successfully
 process-state: reload-required
 ----
+// removing the custom module
+And finally, to remove the custom module, run the following command, replacing `__{jbossHomeName}__` with the path to your server.
+[source,subs="+quotes,attributes+",options="nowrap"]
+----
+$ __{jbossHomeName}__/bin/jboss-cli.sh --connect --file=remove-custom-module.cli
+----
+
+NOTE: For Windows, use the `__{jbossHomeName}__\bin\jboss-cli.bat` script.
+
 
 // Restore the {productName} Standalone Server Configuration Manually
-include::../shared-doc/restore-standalone-server-configuration-manual.adoc[leveloffset=+2]
+include::../shared-doc/restore-standalone-server-configuration-manual.adoc[leveloffset=+3]
 
 // Build and run sections for other environments/builds
-ifndef::ProductRelease,EAPXPRelease[]
 include::../shared-doc/build-and-run-the-quickstart-with-provisioned-server.adoc[leveloffset=+1]
-endif::[]
 
 // Quickstart not compatible with OpenShift
 include::../shared-doc/openshift-incompatibility.adoc[leveloffset=+1]

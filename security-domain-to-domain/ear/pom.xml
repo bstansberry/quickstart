@@ -26,7 +26,7 @@
     <parent>
         <groupId>org.wildfly.quickstarts</groupId>
         <artifactId>security-domain-to-domain</artifactId>
-        <version>34.0.0.Beta1</version>
+        <version>38.0.0.Beta1-SNAPSHOT</version>
     </parent>
     <artifactId>security-domain-to-domain-ear</artifactId>
     <packaging>ear</packaging>
@@ -97,6 +97,9 @@
     <profiles>
         <profile>
             <id>provisioned-server</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
@@ -123,8 +126,6 @@
                                     <resolve-expressions>false</resolve-expressions>
                                 </packaging-script>
                             </packaging-scripts>
-                            <!-- deploys the quickstart on root web context -->
-                            <name>ROOT.ear</name>
                         </configuration>
                         <executions>
                             <execution>
@@ -133,19 +134,6 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-ear-plugin</artifactId>
-                        <configuration>
-                            <modules>
-                                <webModule>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>security-domain-to-domain-web</artifactId>
-                                    <contextRoot>/</contextRoot>
-                                </webModule>
-                            </modules>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
