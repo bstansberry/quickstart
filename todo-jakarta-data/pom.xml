@@ -49,6 +49,7 @@
         <!-- The versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
         <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
+        <version.org.hibernate.jpamodelgen>6.6.26.Final</version.org.hibernate.jpamodelgen>
     </properties>
 
     <dependencyManagement>
@@ -90,6 +91,8 @@
                             <path>
                                 <groupId>org.hibernate.orm</groupId>
                                 <artifactId>hibernate-jpamodelgen</artifactId>
+                                <!-- TODO. Determine if this should be in the tools bom. -->
+                                <version>${version.org.hibernate.jpamodelgen}</version>
                             </path>
                         </annotationProcessorPaths>
                     </configuration>
