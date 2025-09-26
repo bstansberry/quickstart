@@ -30,7 +30,7 @@
     </parent>
 
     <artifactId>todo-jakarta-data</artifactId>
-    <version>34.0.0.Beta1</version>
+    <version>38.0.0.Beta1-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Quickstart: todo-jakarta-data</name>
     <description>This project demonstrates how to implement a Jakarta Data application to manage ToDos</description>
@@ -45,7 +45,7 @@
 
     <properties>
         <!-- the version for the Server -->
-        <version.server>34.0.0.Beta1</version.server>
+        <version.server>37.0.1.Final</version.server>
         <!-- The versions for BOMs, Packs and Plugins -->
         <version.bom.ee>${version.server}</version.bom.ee>
         <version.plugin.wildfly>5.0.0.Final</version.plugin.wildfly>
@@ -172,12 +172,12 @@
                             </discover-provisioning-info>-->
                             <feature-packs>
                                 <feature-pack>
-                                    <location>wildfly-preview@maven(org.jboss.universe:community-universe)#34.0.0.Beta1</location>
+                                    <location>wildfly-preview@maven(org.jboss.universe:community-universe)#${version.server}</location>
                                 </feature-pack>
                                 <feature-pack>
                                     <groupId>org.wildfly</groupId>
                                     <artifactId>wildfly-datasources-preview-galleon-pack</artifactId>
-                                    <version>8.0.1.Final</version>
+                                    <version>11.0.0.Final</version>
                                 </feature-pack>
                             </feature-packs>
                             <layers>
